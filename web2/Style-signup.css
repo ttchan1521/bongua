@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+html, body {
+	width: 100%;
+	height: 100%;
+	font-family: 'Raleway';
+	font-size: 16px;
+	font-weight: bold;
+    background-image: url("./images/nen2.jpg");
+}
+.bg {
+	background: transparent;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+}
+.row-container {
+	border: 1px solid #fff;
+	border-radius: 20px;
+	margin-top: 20vh; /* vh= Viewport's height */
+	padding: 30px;
+	-webkit-box-shadow: 0px 1px 22px 5px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 1px 22px 5px rgba(0,0,0,0.75);
+	box-shadow: 0px 1px 22px 5px rgba(0,0,0,0.75);
+}
+label, .form-check-label, h1 {
+	color: white;
+	text-shadow: 2px 2px 10px #000;
+}
+.emailError, .usernameError, .passwordError {
+	color: red;
+	background-color: blanchedalmond;
+	padding-left: 10px;
+	border-radius: 4px;
+	margin-top: 1px;
+}
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    margin: 0px 0 12px 0;
+    position: relative;
+}
+img.avatar {
+    width: 33%;
+    border-radius: 50%;
+}
+#form{
+    height: 600px;
+}
+#form p{
+    font-size: 14px;
+    color: #6b6b47;
+}
+.container-fluid h1{
+    text-align: center;
+    margin-bottom: 15px;
+}
+.container-fluid .btn-cancel{
+    width: 70px;
+    height: 32px;
+    border-radius: 5px;
+    border: none;
+    font-size: 15.5px;
+    color: #85adad;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+.btn-cancel:hover{
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 530;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+.container-fluid .psw{
+    float: right;
+    font-size: 15px;
+}
+
+.container-fluid .btn-register {
+    display: block;
+    border: none;
+    width: 100%;
+    height: 37px;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0;
+    color: white;
+    background-color: #008ae6;
+    border-radius: 5px;
+    margin-top: 8px;
+    margin-bottom: 0px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.container-fluid .btn-register:hover{
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 400;
+    background-color: #007acc;
+}
