@@ -65,7 +65,7 @@
 			<div class="carousel-caption">
 				<h1 class="display-2">Wellcome</h1>
 				<h3>Build your Timeline with us</h3>
-				<button type="button" class="btn btn-outline-light btn-lg" onclick="window.location.href='#examples'">
+				<button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='#examples'">
 					VIEW EXAMPLE
 				</button>
 				<button type="button" class="btn btn-primary btn-lg">Get started</button>

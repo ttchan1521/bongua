@@ -88,7 +88,7 @@
 </div>
 
 
-<div class="left-menu">
+<div class="left-menu" style="min-width: 450px">
     <h1 class="display-4 my-4 text-info">Your list timeline</h1>
 
     <div id="timelines_filter" class="dataTables_filter">
@@ -122,7 +122,7 @@
     <button type="button" class="btn btn-primary" id="btnReloadData">Reload data</button>
 </div>
 
-<div class="container-fluid padding" style="min-height: 300px">
+<div class="container-fluid padding" style="min-height: 400px">
     <div class="row padding">
 
         <?php 
