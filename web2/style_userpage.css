@@ -227,11 +227,13 @@ input[type=text], input[type=password] {
   }
 
   .cancelbtn:hover {
-	  opacity: 1;
+	  opacity: 4;
+	  background-color: #6495ED;
   }
 
   .signupbtn:hover {
 	  opacity: 1;
+	  background-color: #6495ED;
   }
   /* Extra styles for the cancel button */
   .cancelbtn {
@@ -245,7 +247,7 @@ input[type=text], input[type=password] {
   /* Add padding to container elements */
   .container {
 	padding: 16px;
-	width: 95%;
+	width: 90%;
   }
   
   /* The Modal (background) */
@@ -257,16 +259,16 @@ input[type=text], input[type=password] {
 	width: 100%; /* Full width */
 	height: 100%; /* Full height */
 	overflow: auto; /* Enable scroll if needed */
-	background-color: #474e5d;
+	background-color: whitesmoke;
 	padding-top: 50px;
   }
   
   /* Modal Content/Box */
   .modal-content {
-	background-color: #fefefe;
+	background-color: #87CEFA;
 	margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-	border: 1px solid #888;
-	width: 50%; /* Could be more or less, depending on screen size */
+	border: none;
+	width: 40%; /* Could be more or less, depending on screen size */
   }
   
   /* Style the horizontal ruler */

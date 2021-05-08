@@ -88,6 +88,8 @@
                     if ($num > 0) {
                     $row = mysqli_fetch_assoc($res);
                     $id = $row['userID'];
+                    $_SESSION['userID'] = $id;
+                    $_SESSION['accountName'] = $username;
                     header("location:http://localhost/timelineProject/web2/user-web.php?id=$id");
                     }  
                     else  {
