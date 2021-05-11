@@ -1,3 +1,14 @@
+<style>
+    .right-panel2 i{
+        font-size: 30px;
+        margin-right: 60px;
+    }
+    .right-panel2{
+        float: right;
+        margin-top: 15px;
+    }
+</style>
+
 <?php if (!empty($_SESSION['current_user'])) { ?>
     <div class="clear-both"></div>
     </div>
@@ -7,9 +18,10 @@
             <div class="left-panel">
                 © TimeLine 2021 - by BoNgua
             </div>
-            <div class="right-panel">
-                <a target="_blank" href="https://www.facebook.com/GrapePanta" title="Facebook Thao Tran"><img height="48" src="../images/facebook.png" /></a>
-                <a target="_blank" href="https://www.youtube.com/c/CheriHyeri%EC%B2%B4%EB%A6%AC%ED%98%9C%EB%A6%AC/featured" title="Youtube Channel"><img height="48" src="../images/youtube.png" /></a>
+            <div class="right-panel2">
+                <a href="https://www.facebook.com/GrapePanta"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+			    <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="clear-both"></div>
         </div>

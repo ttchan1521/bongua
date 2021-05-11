@@ -4,8 +4,28 @@
         <title>Admin_Header</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="admin.css" >
         <script src="../resources/ckeditor/ckeditor.js"></script>
+        <style>
+            h1{
+                margin-top: 15px;
+                margin-left : 30px;
+            }
+            #admin-heading-panel{
+                height: 80px;
+                background-color: #595959;
+            }
+            .right-panel{
+                font-size: 18px;
+                margin-top: 15px;
+                margin-right: 20px;
+            }
+            .right-panel i{
+                margin-right: 5px;
+            }
+
+        </style>
     </head>
     <body>
         <?php
@@ -16,13 +36,11 @@
             ?>
             <div id="admin-heading-panel" >
                 <div class="left-panel">
-                    <a class="logo">Timeline</a>
+                    <h1><i class="fas fa-home"></i>Home</h1>
                 </div>
                 <div class="right-panel">
-                    <img height="24" src="../images/home.png" />
-                    <a href="index.php">Trang chủ</a>
-                    <a href="change_password.php">Đổi mật khẩu</a>
-                    <a href="logout.php"><i class="material-icons">&#xe7ff;</i>Logout</a>
+                    <a href="change_password.php"><i class="fas fa-unlock-alt"></i>Change password</a>
+                    <a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
                 </div>
             </div>
 

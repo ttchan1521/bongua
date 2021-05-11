@@ -18,7 +18,7 @@ if (!empty($_SESSION['current_user'])) {
             </div>
             <ul>
                 <li class="timeline-item-heading">
-                    <div class="timeline-prop timeline-name">timelineName</div>
+                    <div class="timeline-prop timeline-name">TimelineName</div>
                     <div class="timeline-prop timeline-button">
                         Xóa
                     </div>

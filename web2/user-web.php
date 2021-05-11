@@ -14,7 +14,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link href="style_userpage.css" rel="stylesheet">
     <style>
-        .card-body .btn {
+         .card-body .btn {
             font-weight: 300;
             padding: .300rem .60rem;
             font-size: 0.8rem;
@@ -146,18 +146,19 @@
     <?php 
         if(isset($_POST['search'])) {
             $searchKey = $_POST['search'];
-            $sql = "SELECT * FROM timelines WHERE userID=$id AND universesName LIKE '%$searchKey%' ";
+            $sql = "SELECT universesName FROM timelines WHERE universesName LIKE '%$searchKey%' ";
         } else {
-            $sql = "SELECT * FROM timelines WHERE userID=$id";
+            $id = $_GET['id'];
+            $sql = "SELECT universesName FROM timelines WHERE userID = $id";
             $searchKey = "";
         }
-        $res = mysqli_query($con, $sql);
+        $result = mysqli_query($con, $sql);
     ?>
     <div id="timelines_filter" class="dataTables_filter">
         <form action="" method="POST"> 
 			<input type="text" name="search" class='form-control' 
                 placeholder="Search By Name" value="<?php echo $searchKey; ?>" > 
-			<button class="btn"><i class="fas fa-search"></i></button>
+			<button style="submit" class="btn"><i class="fas fa-search"></i></button>
 	    </form>
     </div>
 
@@ -173,6 +174,20 @@
         </label>
     </div>
 
+    <table class="table table-striped" id="users" >
+        <thead >
+            <tr id="list-header">
+                <th scope="col">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while($row = mysqli_fetch_object($result)) { ?>
+                <tr>
+                    <td><a href=""><?php echo $row->universesName ?></a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
     <!-- <button type="button" class="btn btn-primary" id="btnReloadData">Reload data</button> -->
 </div>
 
@@ -180,6 +195,11 @@
     <div class="row padding">
 
         <?php 
+            $id = $_GET['id'];
+            
+            $sql = "SELECT * FROM timelines WHERE userID = $id";
+
+            $res = mysqli_query($con, $sql);
 
             if ($res) {
                 $count = mysqli_num_rows($res);
@@ -195,7 +215,7 @@
                                 <div class="card">
                                     <img class="card-img-top" src="./images/image.jpg">
                                     <div class="card-body">
-                                        <h4 class="card-title"><a href="form/basic_form.php?id=<?php echo $id; ?>&u=<?php echo $tml; ?>"><?php echo $name; ?></a></h4>
+                                        <h4 class="card-title"><a href=""><?php echo $name; ?></a></h4>
                                         <a href="rename_timeline.php?id=<?php echo $id; ?>&tml=<?php echo $tml; ?>&tmlName=<?php echo $name; ?>" class="btn btn-outline-secondary">Rename</a>
                                         <a href="delete_timeline.php?id=<?php echo $id; ?>&tml=<?php echo $tml; ?>" class="btn btn-outline-secondary">Delete</a>
                                     </div>
@@ -218,7 +238,7 @@
         
     </div>
 </div>
-<div id="snackbar">Đổi mật khẩu thành công</div>
+<div id="snackbar">Password changed successfully</div>
 <?php
     if (isset($_SESSION['changep'])) {
         ?>
@@ -231,6 +251,7 @@
         unset($_SESSION['changep']);
     }
 ?>
+
     <?php
         include './footer.php';
     ?>

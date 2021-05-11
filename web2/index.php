@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>FirstScreen</title>
 	<!-- Import Boostrap css, js, font awesome here -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">       
@@ -18,28 +18,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js">
 	</script>
     <link href="style2.css" rel="stylesheet">
+	<style>
+		.h1, h1 {
+    		font-size: 1.8rem!important;
+		}
+	</style>
+
 </head>
 <body>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 	<div class="container-fluid">
 		<a class="navbar-branch" href="#">
-			<h1 height="50" >Bambu</h1>
+			<h1 height="50" ><i class="fas fa-home"></i>Home</h1>
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item">
-					<a class="nav-link active" href="#">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">About</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Services</a>
-				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="login.php">Login</a>
 				</li>
@@ -57,33 +54,37 @@
 		<li data-target="#slides" data-slide-to="1"></li>
 		<li data-target="#slides" data-slide-to="2"></li>		
 		<li data-target="#slides" data-slide-to="3"></li>
+		<li data-target="#slides" data-slide-to="4"></li>
 	</ul>
 
 	<div class="carousel-inner">
 		<div class="carousel-item active">
-			<img src="./images/0.jpg">
+			<img src="./images/background.jpg">
 			<div class="carousel-caption">
 				<h1 class="display-2">Wellcome</h1>
 				<h3>Build your Timeline with us</h3>
-				<button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='#examples'">
+				<button type="button" class="btn btn-outline-light btn-lg" onclick="window.location.href='#examples'">
 					VIEW EXAMPLE
 				</button>
-				<button type="button" class="btn btn-primary btn-lg">Get started</button>
+				<button type="button" onclick="window.location.href='login.php'" class="btn btn-primary btn-lg">Get started</button>
 			</div>
 		</div>
 		<div class="carousel-item">
-			<img src="./images/1.jpg">
+			<img src="./images/slide1.jpg">
 		</div>
 		<div class="carousel-item">
-			<img src="./images/0.jpg">
+			<img src="./images/slide2.png">
 		</div>
 		<div class="carousel-item">
-			<img src="./images/1.jpg">
+			<img src="./images/slide3.png">
+		</div>
+		<div class="carousel-item">
+			<img src="./images/slide4.jpg">
 		</div>
 	</div>
 </div>
 
-<div id="snackbar">Đang kí thành công</div>
+<div id="snackbar">Success</div>
 <?php
     if (isset($_SESSION['signuped'])) {
         ?>
@@ -108,7 +109,7 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
 			<a href="#">
-				<button type="button" class="btn btn-outline-secondary">Register</button>
+				<button type="button" class="btn btn-outline-secondary" onclick="window.location.href='signup.php'">Register</button>
 			</a>
 		</div>
 	</div>
@@ -249,8 +250,7 @@
 	include 'footer.php';
 ?>
 </body>
-
-</html>	
+</html>
 
 
 
