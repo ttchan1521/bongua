@@ -74,6 +74,25 @@
             -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
             animation: fadein 0.5s, fadeout 0.5s 2.5s;
         }
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;} 
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;} 
+            to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
 
     </style>
 </head>
@@ -106,7 +125,7 @@
                     <a class="nav-link" href="change-password.php?id=<?php echo $id; ?>"><i class="fas fa-unlock-alt"></i>Change pasword</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i>Logout </a>
+                    <a class="nav-link" href="index.php"><i class="fas fa-sign-out-alt"></i>Logout </a>
                 </li>
             </ul>
         </div>
@@ -127,12 +146,12 @@
     <?php 
         if(isset($_POST['search'])) {
             $searchKey = $_POST['search'];
-            $sql = "SELECT universesName FROM timelines WHERE universesName LIKE '%$searchKey%' ";
+            $sql = "SELECT * FROM timelines WHERE userID=$id AND universesName LIKE '%$searchKey%' ";
         } else {
-            $sql = "SELECT universesName FROM timelines";
+            $sql = "SELECT * FROM timelines WHERE userID=$id";
             $searchKey = "";
         }
-        $result = mysqli_query($con, $sql);
+        $res = mysqli_query($con, $sql);
     ?>
     <div id="timelines_filter" class="dataTables_filter">
         <form action="" method="POST"> 
@@ -154,20 +173,6 @@
         </label>
     </div>
 
-    <table class="table table-striped" id="users" >
-        <thead >
-            <tr id="list-header">
-                <th scope="col">Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while($row = mysqli_fetch_object($result)) { ?>
-                <tr>
-                    <td><a href=""><?php echo $row->universesName ?></a></td>
-                </tr>
-            <?php } ?>
-        </tbody>
-    </table>
     <!-- <button type="button" class="btn btn-primary" id="btnReloadData">Reload data</button> -->
 </div>
 
@@ -175,11 +180,6 @@
     <div class="row padding">
 
         <?php 
-            $id = $_GET['id'];
-            
-            $sql = "SELECT * FROM timelines WHERE userID = $id";
-
-            $res = mysqli_query($con, $sql);
 
             if ($res) {
                 $count = mysqli_num_rows($res);
@@ -195,7 +195,7 @@
                                 <div class="card">
                                     <img class="card-img-top" src="./images/image.jpg">
                                     <div class="card-body">
-                                        <h4 class="card-title"><a href=""><?php echo $name; ?></a></h4>
+                                        <h4 class="card-title"><a href="form/basic_form.php?id=<?php echo $id; ?>&u=<?php echo $tml; ?>"><?php echo $name; ?></a></h4>
                                         <a href="rename_timeline.php?id=<?php echo $id; ?>&tml=<?php echo $tml; ?>&tmlName=<?php echo $name; ?>" class="btn btn-outline-secondary">Rename</a>
                                         <a href="delete_timeline.php?id=<?php echo $id; ?>&tml=<?php echo $tml; ?>" class="btn btn-outline-secondary">Delete</a>
                                     </div>

@@ -30,9 +30,17 @@
                     <div class="imgcontainer">
                         <img src="./images/img_avatar2.jpg" alt="Avatar" class="avatar">
                     </div>
-
+                    
                     <form method="post">
                         <h1>Login</h1>
+                        <?php 
+                            if (isset($_SESSION['login']))
+                            {
+                                echo $_SESSION['login'];
+                                unset($_SESSION['login']);
+                            }
+
+                        ?>
                         <div class="form-group">
                             <label>Username</label>
                             <input type="text" class="form-control" placeholder="Enter username" name="loginName" required id="username" >
@@ -53,16 +61,9 @@
                             Cancel
                         </button>
 
+                        
                         <span class="psw"> <a href="#">Forgot password?</a></span>
         
-                        <br><br><br><br>
-                        <?php 
-                            if (isset($_SESSION['login']))
-                            {
-                                echo $_SESSION['login'];
-                                unset($_SESSION['login']);
-                            }
-                        ?>
 
                     </form>
                 </div>

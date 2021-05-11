@@ -16,7 +16,7 @@ html, body {
 .row-container {
 	border: 1px solid #fff;
 	border-radius: 20px;
-	margin-top: 20vh; /* vh= Viewport's height */
+	margin-top: 10vh; /* vh= Viewport's height */
 	padding: 30px;
 	-webkit-box-shadow: 0px 1px 22px 5px rgba(0,0,0,0.75);
 	-moz-box-shadow: 0px 1px 22px 5px rgba(0,0,0,0.75);
@@ -44,7 +44,7 @@ img.avatar {
     border-radius: 50%;
 }
 #form{
-    height: 560px;
+    height: 600px;
 }
 .container-fluid h1{
     text-align: center;
