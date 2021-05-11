@@ -27,7 +27,7 @@ if (isset($_SESSION['userID']) && isset($_SESSION['accountName'])) {
             <form action="change-p.php" method="post">
                 <h1>Change Password</h1>
                 <?php if (isset($_GET['error'])) { ?>
-                <p class="error"><?php echo $_GET['error']; ?></p>
+                <p class="error" style="color: red"><?php echo $_GET['error']; ?></p>
                 <?php } ?>
 
                 <?php if (isset($_GET['success'])) { ?>

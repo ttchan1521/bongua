@@ -13,8 +13,12 @@
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link href="style_userpage.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
     <style>
-         .card-body .btn {
+        .card-body .btn {
             font-weight: 300;
             padding: .300rem .60rem;
             font-size: 0.8rem;
@@ -108,7 +112,7 @@
             if ($res) {
                 while($row = mysqli_fetch_assoc($res))
                 {
-                    $name = $row['firstName'];
+                    $name = $row['accountName'];
                         ?>                 
                         <h5><i class="fas fa-user"></i>  <?php echo $name; ?> </h5>
                 <?php
@@ -146,99 +150,139 @@
     <?php 
         if(isset($_POST['search'])) {
             $searchKey = $_POST['search'];
-            $sql = "SELECT universesName FROM timelines WHERE universesName LIKE '%$searchKey%' ";
+            $sql = "SELECT * FROM timelines WHERE userID=$id AND universesName LIKE '%$searchKey%' ";
         } else {
-            $id = $_GET['id'];
-            $sql = "SELECT universesName FROM timelines WHERE userID = $id";
+            $sql = "SELECT * FROM timelines WHERE userID=$id";
             $searchKey = "";
         }
-        $result = mysqli_query($con, $sql);
+        $res = mysqli_query($con, $sql);
     ?>
     <div id="timelines_filter" class="dataTables_filter">
         <form action="" method="POST"> 
 			<input type="text" name="search" class='form-control' 
                 placeholder="Search By Name" value="<?php echo $searchKey; ?>" > 
-			<button style="submit" class="btn"><i class="fas fa-search"></i></button>
+			<button class="btn"><i class="fas fa-search"></i></button>
 	    </form>
     </div>
 
     <div class="dataTables_length" id="timelines_length">
+    <form action="change_length.php" method="POST">
         <label>
             Show
+            </label>
             <select name="timelines_length" aria-controls="timelines" class>
-                <option value="8">8</option>
-                <option value="15">15</option>
-                <option value="25">25</option>
+                <?php 
+                    if (!isset($_SESSION['length'])) {
+                ?>
+                        <option value=9 selected>9</option>
+                        <option value=12>12</option>
+                        <option value=15>15</option>
+                <?php 
+                    } elseif ($_SESSION['length'] == 15) {
+                    ?>
+                        <option value=9>9</option>
+                        <option value=12>12</option>
+                        <option value=15 selected>15</option>
+                    <?php
+                    } elseif ($_SESSION['length'] == 12) {
+                    ?>
+                        <option value=9>9</option>
+                        <option value=12 selected>12</option>
+                        <option value=15>15</option>
+                    <?php    
+                    } else {
+                    ?>
+                        <option value=9 selected>9</option>
+                        <option value=12>12</option>
+                        <option value=15>15</option>
+                    <?php
+                    }
+                ?>
             </select>
+            <label>
             entries
         </label>
+        <input type="submit" name="smlength" value="Execute">    
+    </form>
     </div>
-
-    <table class="table table-striped" id="users" >
-        <thead >
-            <tr id="list-header">
-                <th scope="col">Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while($row = mysqli_fetch_object($result)) { ?>
-                <tr>
-                    <td><a href=""><?php echo $row->universesName ?></a></td>
-                </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+    
     <!-- <button type="button" class="btn btn-primary" id="btnReloadData">Reload data</button> -->
 </div>
 
 <div class="container-fluid padding" style="min-height: 500px" style="max-height: 200px">
     <div class="row padding">
+        <?php
 
-        <?php 
-            $id = $_GET['id'];
-            
-            $sql = "SELECT * FROM timelines WHERE userID = $id";
-
-            $res = mysqli_query($con, $sql);
+            if (isset($_GET['pageno'])) {
+                $pageno = $_GET['pageno'];
+            } else {
+                $pageno = 1;
+            }
+            if (isset($_SESSION['length'])) {
+                $no_of_records_per_page = $_SESSION['length'];
+            }
+            else $no_of_records_per_page = 9;
+            $offset = ($pageno-1) * $no_of_records_per_page;
 
             if ($res) {
                 $count = mysqli_num_rows($res);
 
-                if ($count > 0)
-                {
-                    while($row = mysqli_fetch_assoc($res))
-                    {
-                        $name = $row['universesName'];
-                        $tml = $row['universeID'];
-                        ?>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="./images/image.jpg">
-                                    <div class="card-body">
-                                        <h4 class="card-title"><a href=""><?php echo $name; ?></a></h4>
-                                        <a href="rename_timeline.php?id=<?php echo $id; ?>&tml=<?php echo $tml; ?>&tmlName=<?php echo $name; ?>" class="btn btn-outline-secondary">Rename</a>
-                                        <a href="delete_timeline.php?id=<?php echo $id; ?>&tml=<?php echo $tml; ?>" class="btn btn-outline-secondary">Delete</a>
+                if ($count > 0) {
+
+                    $total_pages = ceil($count / $no_of_records_per_page);
+
+                    $sql = "SELECT * FROM timelines WHERE userID=$id LIMIT $offset, $no_of_records_per_page";
+                    $res_data = mysqli_query($con,$sql);
+                    while($row = mysqli_fetch_array($res_data)){
+                            $name = $row['universesName'];
+                            $tml = $row['universeID'];
+                            ?>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <img class="card-img-top" src="./images/image.jpg">
+                                        <div class="card-body">
+                                            <h4 class="card-title"><a href="form/basic_form.php?id=<?php echo $id; ?>&u=<?php echo $tml; ?>&e=-2"><?php echo $name; ?></a></h4>
+                                            <a href="rename_timeline.php?id=<?php echo $id; ?>&tml=<?php echo $tml; ?>&tmlName=<?php echo $name; ?>" class="btn btn-outline-secondary">Rename</a>
+                                            <a href="delete_timeline.php?id=<?php echo $id; ?>&tml=<?php echo $tml; ?>" class="btn btn-outline-secondary">Delete</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php
+                            <?php
                     }
+                
                 }
                 else 
                 {
-                    echo "Bạn chưa tạo Timeline";
+                    echo "Bạn chưa tạo timelines";
                 }
             }
             else 
             {
                 echo "Có lỗi xảy ra trong quá trình thực hiện";
             }
+?>
         
-        ?>
         
     </div>
+    <?php 
+        if ($count > 0) {
+            ?>
+            <ul class="pagination" style="position: relative; left: 800px;">
+                        <li><a href="?id=<?php echo $id; ?>&pageno=1">First</a></li>
+                        <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
+                            <a href="<?php if($pageno <= 1){ echo "?id=$id"; } else { echo "?id=$id&pageno=".($pageno - 1); } ?>">Prev</a>
+                        </li>
+                        <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
+                            <a href="<?php if($pageno >= $total_pages){ echo "?id=$id"; } else { echo "?id=$id&pageno=".($pageno + 1); } ?>">Next</a>
+                        </li>
+                        <li><a href="?id=<?php echo $id; ?>&pageno=<?php echo $total_pages; ?>">Last</a></li>
+                    </ul>
+            <?php
+        }
+    ?>
+    
 </div>
-<div id="snackbar">Password changed successfully</div>
+<div id="snackbar">Đổi mật khẩu thành công</div>
 <?php
     if (isset($_SESSION['changep'])) {
         ?>
@@ -251,7 +295,6 @@
         unset($_SESSION['changep']);
     }
 ?>
-
     <?php
         include './footer.php';
     ?>

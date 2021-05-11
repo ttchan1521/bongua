@@ -27,10 +27,17 @@
 
                 <form method="post">
                     <h1>Sign up</h1>
+                    <?php
+                    if (isset($_SESSION['signup']))
+                    {
+                        echo $_SESSION['signup'];
+                        unset($_SESSION['signup']);
+                    }
+                    ?>
                     <p>Please fill in this form to create an account.</p>
                     <div class="form-group">
-                        <label>Email address</label>
-                        <input type="text" class="form-control" placeholder="Enter Email" name="signupEmail" required>
+                        <label>Username</label>
+                        <input type="text" class="form-control" placeholder="Enter Username" name="signupEmail" required>
                         <p class="emailError"></p>
                      </div>
                     <div class="form-group">
@@ -40,7 +47,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="label">Enter Password</label>
+                        <label class="label">Repeat Password</label>
                         <input type="password" class="form-control" placeholder="Repeat Password" name="psw-repeat" required>
                         <p class="passwordError"></p>
                     </div>
@@ -59,13 +66,7 @@
                     </button>
 
                     <br><br><br>
-                    <?php
-                    if (isset($_SESSION['signup']))
-                    {
-                        echo $_SESSION['signup'];
-                        unset($_SESSION['signup']);
-                    }
-                    ?>
+                    
 
                 </form>
                 </div>
