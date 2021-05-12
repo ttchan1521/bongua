@@ -114,7 +114,7 @@
                 {
                     $name = $row['accountName'];
                         ?>                 
-                        <h5><i class="fas fa-user"></i>  <?php echo $name; ?> </h5>
+                        <h5 style="color: white; font-size: 40px;"><i class="fas fa-user"></i>  <?php echo $name; ?> </h5>
                 <?php
                 }
             }
@@ -242,6 +242,7 @@
                                         <img class="card-img-top" src="./images/image.jpg">
                                         <div class="card-body">
                                             <h4 class="card-title"><a href="form/basic_form.php?id=<?php echo $id; ?>&u=<?php echo $tml; ?>&e=-2"><?php echo $name; ?></a></h4>
+                                            <a href="form/basic_form.php?id=<?php echo $id; ?>&u=<?php echo $tml; ?>&e=-1" class="btn btn-outline-secondary">View</a>
                                             <a href="rename_timeline.php?id=<?php echo $id; ?>&tml=<?php echo $tml; ?>&tmlName=<?php echo $name; ?>" class="btn btn-outline-secondary">Rename</a>
                                             <a href="delete_timeline.php?id=<?php echo $id; ?>&tml=<?php echo $tml; ?>" class="btn btn-outline-secondary">Delete</a>
                                         </div>
