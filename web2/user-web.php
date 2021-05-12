@@ -231,7 +231,7 @@
 
                     $total_pages = ceil($count / $no_of_records_per_page);
 
-                    $sql = "SELECT * FROM timelines WHERE userID=$id LIMIT $offset, $no_of_records_per_page";
+                    $sql = "SELECT * FROM timelines WHERE userID=$id AND universesName LIKE '%$searchKey%' LIMIT $offset, $no_of_records_per_page";
                     $res_data = mysqli_query($con,$sql);
                     while($row = mysqli_fetch_array($res_data)){
                             $name = $row['universesName'];
@@ -241,8 +241,8 @@
                                     <div class="card">
                                         <img class="card-img-top" src="./images/image.jpg">
                                         <div class="card-body">
-                                            <h4 class="card-title"><a href="form/basic_form.php?id=<?php echo $id; ?>&u=<?php echo $tml; ?>&e=-2"><?php echo $name; ?></a></h4>
-                                            <a href="form/basic_form.php?id=<?php echo $id; ?>&u=<?php echo $tml; ?>&e=-1" class="btn btn-outline-secondary">View</a>
+                                            <h4 class="card-title"><a href="form/form.php?id=<?php echo $tml; ?>"><?php echo $name; ?></a></h4>
+            
                                             <a href="rename_timeline.php?id=<?php echo $id; ?>&tml=<?php echo $tml; ?>&tmlName=<?php echo $name; ?>" class="btn btn-outline-secondary">Rename</a>
                                             <a href="delete_timeline.php?id=<?php echo $id; ?>&tml=<?php echo $tml; ?>" class="btn btn-outline-secondary">Delete</a>
                                         </div>
