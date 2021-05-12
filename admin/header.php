@@ -33,10 +33,11 @@
         include '../connect_db.php';
         include '../function.php';
         if (!empty($_SESSION['current_user'])) { //Kiểm tra xem đã đăng nhập 
+        $currentUser = $_SESSION['current_user'];
             ?>
             <div id="admin-heading-panel" >
                 <div class="left-panel">
-                    <h1><i class="fas fa-home"></i>Home</h1>
+                    <h1><i class="fas fa-user" style="margin-right: 5px"></i><?= $currentUser['fullname'] ?></h1>
                 </div>
                 <div class="right-panel">
                     <a href="change_password.php"><i class="fas fa-unlock-alt"></i>Change password</a>

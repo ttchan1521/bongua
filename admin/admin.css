@@ -80,18 +80,7 @@ h1{
     background: #717171;
     color: #FFF;
 }
-.buttons{
-    text-align: right;
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 15px;
-    line-height: 38px;
-}
-.buttons a{
-    color: #FFF;
-    padding: 10px;
-    background: #000;
-}
+
 a{
     text-decoration: none;
 }
@@ -276,4 +265,9 @@ a:hover{
 
 .line:hover {
     background-color:darkgrey;
+}
+
+.timeline-search {
+    margin-bottom: 8px;
+    height: 30px;
 }

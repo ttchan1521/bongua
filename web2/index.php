@@ -22,6 +22,14 @@
 		.h1, h1 {
     		font-size: 1.8rem!important;
 		}
+		.carousel-inner {
+			height: 450px;
+		}
+		.carousel-inner img{
+			height: 450px;
+			width: 100%;
+		}
+
 	</style>
 
 </head>
@@ -30,7 +38,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 	<div class="container-fluid">
 		<a class="navbar-branch" href="#">
-			<h1 height="50" ><i class="fas fa-home"></i>Home</h1>
+			<h1 height="50" style="color: white"><i class="fas fa-home"></i>Home</h1>
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
 			<span class="navbar-toggler-icon"></span>
@@ -60,13 +68,13 @@
 	<div class="carousel-inner">
 		<div class="carousel-item active">
 			<img src="./images/background.jpg">
-			<div class="carousel-caption">
-				<h1 class="display-2">Wellcome</h1>
+			<div class="carousel-caption" >
+				<h1 class="display-2" >Wellcome</h1>
 				<h3>Build your Timeline with us</h3>
-				<button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='#examples'">
+				<button type="button" class="btn btn-outline-light btn-lg" onclick="window.location.href='#examples'" style="color: rgb(108, 138, 126)">
 					VIEW EXAMPLE
 				</button>
-				<button type="button" onclick="window.location.href='login.php'" class="btn btn-primary btn-lg">Get started</button>
+				<button type="button" onclick="window.location.href='login.php'" class="btn btn-primary btn-lg" >Get started</button>
 			</div>
 		</div>
 		<div class="carousel-item">
@@ -123,7 +131,7 @@
 		<!-- Horizontal Rule -->
 		<hr> 
 		<div class="col-12">
-			<p>Welcome to Bambu......bla.....</p>
+			<p>Welcome to Timeline......bla.....</p>
 		</div>
 	</div>
 </div>
@@ -200,7 +208,7 @@
 				<img class="card-img-top" src="./images/image.jpg">
 				<div class="card-body">
 					<h4 class="card-title">Tineline1</h4>
-					<p class="card-text">............................................balabla............</p>
+					<p class="card-text">..........................balabla............</p>
 					<a href="#" class="btn btn-outline-secondary">See example</a>
 				</div>
 			</div>
@@ -231,7 +239,7 @@
 		</div>
 	</div>
 </div>
-<div class="container-fluid padding">
+<div class="container-fluid padding" style="margin-top: 20px;">
 	<div class="row padding">
 		<div class="col-md-12 col-lg-6">
 			<h2>Our vision</h2>

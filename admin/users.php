@@ -12,8 +12,8 @@ if (!empty($_SESSION['current_user'])) {
         <div class="timeline-items">
             <ul>
                 <li class="timeline-item-heading">
-                    <div class="timeline-prop timeline-name">userName</div>
-                    <div class="timeline-prop timeline-time">Amount</div>
+                    <div class="timeline-prop timeline-name" style = "width: 705px">UserName</div>
+                    <div class="timeline-prop timeline-time" style = "50px">Amount</div>
                     <div class="clear-both"></div>
                 </li>
                 <?php
@@ -23,10 +23,10 @@ if (!empty($_SESSION['current_user'])) {
                     <li>
                         <a href="user.php?id=<?php echo $id ?>" class="line">
                             <div class="line">
-                            <div class="timeline-prop timeline-name"><?= $row['accountName'] ?></div>
+                                <div class="timeline-prop timeline-name" style = "width: 705px"><?= $row['accountName'] ?></div>
                     
-                            <div class="timeline-prop timeline-time"><?= $row['universeAmount'] ?></div>
-                            <div class="clear-both"></div>
+                                <div class="timeline-prop timeline-time"><?= $row['universeAmount'] ?></div>
+                                <div class="clear-both"></div>
                             </div>
                         </a>
                     </li>
