@@ -26,7 +26,7 @@
         #add .cancelbtn {
             float: right;
             text-decoration: none;
-            background-color: LightGray;
+            background-color: #999999;
             height: 30px;
             width: 80px;
             margin-right: 10px;
@@ -39,8 +39,8 @@
 </head>
 
 <body>
-    <div id="id01" class="modal">
-        <form class="modal-content" method="POST">
+    <div id="id01" class="modal" style="background-color:  #f2f2f2">
+        <form class="modal-content" style="background-color:  #d9d9d9; color: #404040" method="POST">
             <div class="container">
 
                 <h1>Create new Timeline</h1>

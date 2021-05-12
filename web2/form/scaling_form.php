@@ -23,7 +23,7 @@
         <div class="form"><a href="table_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1">Table</a></div>
         <div class="form"><a>Real-Time Scale</a></div>
         <div class="form"><a href="basic_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1">Basic</a></div>
-        <div class="form"><a href="paging_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1">Page By Page</a></div>
+        <div class="form"><a href="paging_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1&page=1&n=4">Page By Page</a></div>
     </div>
     <div>
         <a href="search_event.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>" class="search-icon" title="Search"><i class="fas fa-search"></i></a>

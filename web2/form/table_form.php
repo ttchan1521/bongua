@@ -9,74 +9,92 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="basic_form.css">
+    <link rel="stylesheet" href="table_form.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 </head>
 <body>
 
-<div class="tool-bar">
-    <a onclick="" class="bars-icon" title="Menu"><i class="fas fa-bars"></i></a>
-    <div id="form-option" class="form-option">
+<div class="header">
+    <div class="tool-bar">
         <?php
             $id = $_GET['id'];
             $uid = $_GET['u'];
         ?>
-        <div class="form"><a>Table</a></div>
-        <div class="form"><a href="scaling_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1">Real-Time Scale</a></div>
-        <div class="form"><a href="basic_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1">Basic</a></div>
-        <div class="form"><a href="paging_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1">Page By Page</a></div>
-    </div>
-    <div>
+        <a href="http://localhost/timelineProject/web2/user-web.php?id=<?php echo $id; ?>" class="home-icon" title="Home"><i class="fas fa-home"></i></a>
+        <a onmouseover="document.getElementById('form-option').style.display='block'" onmouseout="document.getElementById('form-option').style.display='none'" class="sync-icon" title="Form option"><i class="fas fa-sync-alt"></i></a>
+        <div onmouseover="document.getElementById('form-option').style.display='block'" onmouseout="document.getElementById('form-option').style.display='none'" id="form-option" class="form-option">
+            <a><div class="form-1"><p>Table</p></div></a>
+            <a href="scaling_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1"><div class="form-2"><p>Real-Time Scale</p></div></a>
+            <a href="basic_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1"><div class="form-3"><p>Basic</p></div></a>
+            <a href="paging_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1&page=1&n=4"><div class="form-4"><p>Page By Page</p></div></a>
+        </div>
         <a href="search_event.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>" class="search-icon" title="Search"><i class="fas fa-search"></i></a>
     </div>
 </div>
 <div id="wrapper" class="wrapper">
-    <div id="time-line" class="time-line">
+    <div class="table">
         <?php
             $id = $_GET['id'];
             $uid = $_GET['u'];
 
             $sql = "SELECT * FROM events WHERE universeID = $uid ORDER BY eventYear";
             $res = mysqli_query($con, $sql);
-
-            if($res) {
-                $sql_l = "SELECT eventLine FROM events WHERE universeID = $uid GROUP BY eventLine";
-                $res_l = mysqli_query($con, $sql_l);
-                $count_l = mysqli_num_rows($res_l);
-
-                if($count_l > 0) {
-                    while($row = mysqli_fetch_assoc($res_l)) {
-                        $line = $row['eventLine'];
+            $count = mysqli_num_rows($res);
+        ?>
+        <table style="width: 100%">
+            <tr>
+                <th>Year</th>
+                <?php
+                    $sql_l = "SELECT * FROM `lines` WHERE universeID = $uid";
+                    $res_l = mysqli_query($con, $sql_l);
+                    $count_l = mysqli_num_rows($res_l);
+                    if($count_l > 0) {
+                        while($row = mysqli_fetch_assoc($res_l)) {
+                            $line = $row['lineName'];
+                            ?>
+                            <th><?php echo $line; ?></th>
+                            <?php
+                        }
+                    }
+                ?>
+            </tr>
+            <?php
+                if($count > 0) {
+                    while($row = mysqli_fetch_assoc($res)) {
+                        $year = $row['eventYear'];
                         ?>
-                        <a href="basic_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1" class="line-icon"><i class="fas fa-star"></i></a>
-                        <?php
-                        echo $line;
+                        <tr>
+                            <td><?php echo $year; ?></td>
+                            <?php
+                                $res_l = mysqli_query($con, $sql_l);
+                                while($row_l = mysqli_fetch_assoc($res_l)) {
+                                    $line = $row_l['lineName'];
 
-                        $sql_e = "SELECT * FROM events WHERE universeID = $uid AND eventLine LIKE '%$line%' ORDER BY eventYear";
-                        $res_e = mysqli_query($con, $sql_e);
+                                    $sql_e = "SELECT * FROM events WHERE universeID = $uid AND eventYear = $year AND eventLine LIKE '%$line%'";
+                                    $res_e = mysqli_query($con, $sql_e);
+                                    $count_e = mysqli_num_rows($res_e);
 
-                            while($row = mysqli_fetch_assoc($res_e)) {
-                                $name = $row['eventName'];
-                                $des = $row['eventDescription'];
-                                $date = $row['eventYear'];
-                                $date_end = $row['eventYear-end'];
-                                ?>
-                                <a href="basic_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=<?php echo $row['eventID']; ?>" class="event-icon"><i class="fas fa-circle"></i></a>
-                                <?php
-                                echo $date;
-                            }
+                                    if($count_e == 0) {
+                                        ?>
+                                        <td></td>
+                                        <?php
+                                    }
+                                    while($row_e = mysqli_fetch_assoc($res_e)) {
+                                        $name = $row_e['eventName'] ?? "";
+                                        ?>
+                                        <td><?php echo $name; ?></td>
+                                        <?php
+                                    }
+                                }
 
-                        ?>
-                        <br>
+
+                            ?>
+                        </tr>
                         <?php
                     }
-                } else {
-                    echo "There's nothing yet!";
                 }
-            } else {
-                echo "There's something wrong :(";
-            }
-        ?>
+            ?>
+        </table>
     </div>
     <?php
         $id = $_GET['id'];

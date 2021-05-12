@@ -23,7 +23,7 @@
             <a onclick="window.location.href='basic_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1'" class="close-icon"><i class="fas fa-times"></i></a>
         </div>
         <div class="add-event-main">
-            <label for="eventName">Event Name </label><input type="text" name="eventName" required><br>
+            <label for="eventName">Event Name </label><input type="text" name="eventName"><br>
             <label for="eventDate">Event Year </label><input type="number" name="eventDate" required>
         </div>
         <div class="add-event-bottom">
@@ -39,16 +39,16 @@
 </div>
 <?php
     if(isset($_POST['submit'])) {
-        $name = $_POST['eventName'];
+        $name = $_POST['eventName'] ?? "";
         $date = $_POST['eventDate'];
-        $des = $_POST['eventDes'];
-        $line = $_POST['eventLine'];
+        $des = $_POST['eventDes'] ?? "";
+        $line = $_POST['eventLine'] ?? "";
 
         $id = $_GET['id'];
         $uid = $_GET['u'];
         unset($_POST['submit']);
 
-        $sql = "INSERT INTO events(universeID, eventName, eventDescription, eventYear) VALUES ($uid, '$name', '$des', $date)";
+        $sql = "INSERT INTO events(universeID, eventName, eventDescription, eventLine, eventYear) VALUES ($uid, '$name', '$des', '$line', $date)";
         $res = mysqli_query($con, $sql);
 
         if ($res) {

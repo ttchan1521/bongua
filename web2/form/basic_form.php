@@ -14,19 +14,20 @@
 </head>
 <body>
 
-<div class="tool-bar">
-    <a onclick="" class="bars-icon" title="Menu"><i class="fas fa-bars"></i></a>
-    <div id="form-option" class="form-option">
+<div class="header">
+    <div class="tool-bar">
         <?php
             $id = $_GET['id'];
             $uid = $_GET['u'];
         ?>
-        <div class="form"><a href="table_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1">Table</a></div>
-        <div class="form"><a href="scaling_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1">Real-Time Scale</a></div>
-        <div class="form"><a>Basic</a></div>
-        <div class="form"><a href="paging_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1">Page By Page</a></div>
-    </div>
-    <div>
+        <a href="http://localhost/timelineProject/web2/user-web.php?id=<?php echo $id; ?>" class="home-icon" title="Home"><i class="fas fa-home"></i></a>
+        <a onmouseover="document.getElementById('form-option').style.display='block'" onmouseout="document.getElementById('form-option').style.display='none'" class="sync-icon" title="Form option"><i class="fas fa-sync-alt"></i></a>
+        <div onmouseover="document.getElementById('form-option').style.display='block'" onmouseout="document.getElementById('form-option').style.display='none'" id="form-option" class="form-option">
+            <a href="table_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1"><div class="form-1"><p>Table</p></div></a>
+            <a href="scaling_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1"><div class="form-2"><p>Real-Time Scale</p></div></a>
+            <a><div class="form-3"><p>Basic</p></div></a>
+            <a href="paging_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1&page=1&n=4"><div class="form-4"><p>Page By Page</p></div></a>
+        </div>
         <a href="search_event.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>" class="search-icon" title="Search"><i class="fas fa-search"></i></a>
     </div>
 </div>
@@ -40,13 +41,13 @@
             $res = mysqli_query($con, $sql);
 
             if($res) {
-                $sql_l = "SELECT eventLine FROM events WHERE universeID = $uid GROUP BY eventLine";
+                $sql_l = "SELECT * FROM `lines` WHERE universeID = $uid";
                 $res_l = mysqli_query($con, $sql_l);
                 $count_l = mysqli_num_rows($res_l);
 
                 if($count_l > 0) {
                     while($row = mysqli_fetch_assoc($res_l)) {
-                        $line = $row['eventLine'];
+                        $line = $row['lineName'];
                         ?>
                         <a href="basic_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1" class="line-icon"><i class="fas fa-star"></i></a>
                         <?php
