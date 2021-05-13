@@ -10,25 +10,23 @@
     <link href="style_userpage.css" rel="stylesheet">
 </head>
 <body>
-<div id="id01" class="modal">
+<div id="id01" class="modal" style="background-color: #ffd8d8; color: #1E90FF">
 
-    <form class="modal-content" method="POST">
-        <div class="container">
+    <form class="modal-content" method="POST" style = "width: 50%; border:none; background-color: #e16868; color: #fff;">
+        <div class="container" id="cover" style="height: 250px">
             <?php 
                     $id = $_GET['id'];
                     $tml = $_GET['tml'];
                     $tmlName = $_GET['tmlName'];
             ?>
 
-            <h1>Create new Timeline</h1>
-            <p>Please fill in this form to create an timeline</p>
 
             <label for="name">Name: </label>
-            <input type="text" name="name" required value="<?php echo $tmlName; ?>">
+            <input type="text" name="name" style="background-color: #FFDAB9; height: 70px; font-size: 25px" required value="<?php echo $tmlName; ?>">
 
             <div class="clearfix">
-                <a href="user-web.php?id=<?php echo $id; ?>" class="cancelbtn">Cancel</a>
-                <button type="submit" name="submit" class="signupbtn">Rename</button>
+                <a href="user-web.php?id=<?php echo $id; ?>" class="cancelbtn" style="background-color:#FFDAB9; color: #1E90FF">Cancel</a>
+                <button type="submit" name="submit" class="signupbtn" style = "font-family: 'Gamja Flower'; font-size: 35px; background-color:#FFDAB9; color: #1E90FF">Rename</button>
             </div>
         </div>
 

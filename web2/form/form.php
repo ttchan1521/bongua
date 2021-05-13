@@ -41,10 +41,14 @@
                       <h1 style="color: white"><?php echo $year; ?></h1>
                     </div>
                     <div class="content" style="position:relative; bottom: 65px">
+                    <div class="dropdown">
                       <h2><?php echo $eventName; ?></h2>
+                      <div class="dropdown-content">
+                      <a href="edit_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Edit</a>
+                      <a href="delete_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Delete</a>
+                      </div>
+                      </div>
                       <p><?php echo $description; ?></p>
-                      <a stype="text-decoration: none" href="edit_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Edit</a>
-                      <a style="text-decoration: none" href="delete_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Delete</a>
                     </div>
                   </div>
                 <?php
@@ -56,10 +60,14 @@
                       <h1 style="color: white"><?php echo $year; ?></h1>
                     </div>
                     <div class="content" style="position:relative; bottom: 65px">
+                    <div class="dropdown">
                       <h2><?php echo $eventName; ?></h2>
+                      <div class="dropdown-content">
+                      <a href="edit_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Edit</a>
+                      <a href="delete_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Delete</a>
+                      </div>
+                      </div>
                       <p><?php echo $description; ?></p>
-                      <a stype="text-decoration: none" href="edit_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Edit</a>
-                      <a stype="text-decoration: none" href="delete_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Delete</a>
                     </div>
                   </div>
                 <?php
