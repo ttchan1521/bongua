@@ -33,10 +33,13 @@ label, h1 {
 .form{
     display: inline;
 }
-
-#form{
-    height: 400px;
+.form-input {
+    width: 75%!important;
+    float: right;
+    height: 32px;
+    border-radius: 5px;
 }
+
 .container-fluid h1{
     text-align: center;
     margin-bottom: 15px;
@@ -54,12 +57,7 @@ label, h1 {
 .form {
     width: 100%;
 }
-.form-input {
-    width: 75%!important;
-    float: right;
-    height: 32px;
-    border-radius: 5px;
-}
+
 .btnCreate{
     width: 100px;
     height: 45px;
@@ -67,7 +65,7 @@ label, h1 {
     border-radius: 5px;
     border: none;
     font-size: 20px;
-    color: #85adad;
+    color: #595959;
     outline: none;
     background-color: rgba(0, 0, 0, 0.10);
     float: right;

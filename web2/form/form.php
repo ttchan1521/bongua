@@ -11,6 +11,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="form.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <!-- <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
+
 </head>
 <body>
     <div class="timeline">
@@ -41,8 +43,8 @@
                     <div class="content" style="position:relative; bottom: 65px">
                       <h2><?php echo $eventName; ?></h2>
                       <p><?php echo $description; ?></p>
-                      <a href="edit_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Edit</a>
-                      <a href="delete_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Delete</a>
+                      <a stype="text-decoration: none" href="edit_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Edit</a>
+                      <a style="text-decoration: none" href="delete_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Delete</a>
                     </div>
                   </div>
                 <?php
@@ -56,8 +58,8 @@
                     <div class="content" style="position:relative; bottom: 65px">
                       <h2><?php echo $eventName; ?></h2>
                       <p><?php echo $description; ?></p>
-                      <a href="edit_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Edit</a>
-                      <a href="delete_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Delete</a>
+                      <a stype="text-decoration: none" href="edit_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Edit</a>
+                      <a stype="text-decoration: none" href="delete_event.php?id=<?php echo $id; ?>&e=<?php echo $eid; ?>">Delete</a>
                     </div>
                   </div>
                 <?php

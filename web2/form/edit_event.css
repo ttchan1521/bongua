@@ -1,18 +1,79 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+html, body {
+	width: 100%;
+	height: 100%;
+	font-family: 'Raleway';
+	font-size: 16px;
+	font-weight: bold;
+	background-color: #cccccc;
 }
-html{
-    scroll-behavior: smooth;
+.bg {
+	background: transparent;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	margin-top: 50px;
+	background-color: #cccccc;
 }
-body{
-    background: #000;
-    opacity: 0.95;
-    color: #fff;
+.row-container {
+	border: 1px solid #fff;
+	border-radius: 20px;
+	margin-top: 5vh; /* vh= Viewport's height */
+	padding: 30px;
+	-webkit-box-shadow: 0px 1px 22px 5px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 1px 22px 5px rgba(0,0,0,0.75);
+	box-shadow: 0px 1px 22px 5px rgba(0,0,0,0.75);
 }
-::selection{
-    color: #fff;
-    background: #7a7aff;
+label, h1 {
+	color: white;
+	text-shadow: 2px 2px 10px #000;
+}
+
+/* Center the image and position the close button */
+.form{
+    display: inline;
+}
+.form-input {
+    width: 75%!important;
+    float: right;
+    height: 32px;
+    border-radius: 5px;
+}
+
+.container-fluid h1{
+    text-align: center;
+    margin-bottom: 15px;
+}
+.edit-event-head{
+    float: right;
+    font-size: 30px;
+    color: #595959;
+    margin-right: 10px;
+}
+.form label{
+    font-size: 20px;
+
+}
+.form {
+    width: 100%;
+}
+
+.btnEdit{
+    width: 100px;
+    height: 45px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    color: #595959;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.10);
+    float: right;
+}
+.btnEdit:hover{
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 530;
+    background-color: rgba(0, 0, 0, 0.15);
+    border: none;
 }
