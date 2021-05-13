@@ -113,6 +113,7 @@
                 while($row = mysqli_fetch_assoc($res))
                 {
                     $name = $row['accountName'];
+                    $isAdmin = $row['isAdmin'];
                         ?>                 
                         <h5 style="color: white; font-size: 40px;"><i class="fas fa-user"></i>  <?php echo $name; ?> </h5>
                 <?php
@@ -125,6 +126,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+                <?php 
+                    if ($isAdmin==1) {
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="users.php?id=<?php echo $id; ?>">Users</a>
+                        </li>
+                    <?php
+                    }
+                ?>
                 <li class="nav-item">
                     <a class="nav-link" href="change-password.php?id=<?php echo $id; ?>"><i class="fas fa-unlock-alt"></i>Change pasword</a>
                 </li>
