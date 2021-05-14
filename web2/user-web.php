@@ -136,6 +136,9 @@
                     }
                 ?>
                 <li class="nav-item">
+                    <a class="nav-link" href="Profile.php?id=<?php echo $id; ?>"><i class="fas fa-user"></i>Profile </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="change-password.php?id=<?php echo $id; ?>"><i class="fas fa-unlock-alt"></i>Change pasword</a>
                 </li>
                 <li class="nav-item">

@@ -11,10 +11,14 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
+    <style>
+        
+    </style>
+</head>
 
   <body>
       <main class="container-fluid">
@@ -97,35 +101,75 @@
                             </div>
                         </div>
                         <div class="card-footer text-muted">
-                           <button class="btn btn-primary">Create</button>
-                           <button class="btn btn-primary">Update</button>
-                           <button class="btn btn-primary">Delete</button>
-                           <dbutton class="btn btn-primary">Reset</button>
+                           <button class="btn btn-secondary">Create</button>
+                           <button class="btn btn-secondary">Update</button>
+                           <button class="btn btn-secondary">Delete</button>
+                           <dbutton class="btn btn-secondary">Reset</button>
                         </div>
                     </form>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <?php 
-                    if(isset($_POST['search'])) {
-                    $searchKey = $_POST['search'];
-                    $sql = "SELECT * FROM users WHERE accountName LIKE '%$searchKey%' ";
-                } else {
-                    $sql = "SELECT * FROM users ";
-                    $searchKey = "";
-                }
-                    $result = mysqli_query($con, $sql);
-                ?> 
-                <div id="timelines_filter" class="dataTables_filter">
-                    <form action="" method="POST"> 
-			        <input type="text" name="search" class='form' 
-                        placeholder="Search " value="<?php echo $searchKey; ?>" > 
-			        <button style="submit" class="btn"><i class="fas fa-search"></i></button>
-	                </form>
-                </div>
-                <table class="table table-striped">
+                    <?php 
+                        if(isset($_POST['search'])) {
+                        $searchKey = $_POST['search'];
+                        $sql = "SELECT * FROM users WHERE accountName LIKE '%$searchKey%' ";
+                        } else {
+                        $sql = "SELECT * FROM users ";
+                        $searchKey = "";
+                        }
+                        $result = mysqli_query($con, $sql);
+                    ?> 
+                
+                    <div class="search_form" style="width: 100%;">
+                        
+                        <form action="" method="POST" style="display: inline-block; width: 350px;"> 
+			                <input type="text" name="search" class="form-control" 
+                                placeholder="Search by accountName" value="<?php echo $searchKey; ?>" 
+                                style="display: inline; width: 230px; margin-top: 15px;
+                                margin-bottom: 12px;"> 
+			                <button style="submit" class="btn btn-outline-secondary" style="margin-bottom: 12px!important;"><i class="fas fa-search"></i></button>
+	                    </form>
 
-                  
+                        <form action="change_length.php" method="POST" style="float: right; margin-top: 35px;">
+                            <label> Option show </label>
+                            <select name="timelines_length" aria-controls="timelines" >
+                                    <?php 
+                                    if (!isset($_SESSION['length'])) {
+                                        ?>
+                                        <option value=10 selected>10</option>
+                                        <option value=20>20</option>
+                                        <option value=50>50</option>
+                                    <?php 
+                                        } elseif ($_SESSION['length'] == 50) {
+                                             ?>
+                                         <option value=10>10</option>
+                                        <option value=20>20</option>
+                                        <option value=50 selected>50</option>
+                                    <?php
+                                            } elseif ($_SESSION['length'] == 20) {
+                                        ?>
+                                        <option value=10>10</option>
+                                        <option value=20 selected>20</option>
+                                        <option value=50>50</option>
+                                    <?php    
+                                        } else {
+                                    ?>
+                                        <option value=10 selected>10</option>
+                                        <option value=20>20</option>
+                                        <option value=50>50</option>
+                                     <?php
+                                    }
+                                ?>
+                            </select>
+                            <button type="submit" name="smlength" 
+                                style="height: 25px; width: 70px;">  
+                                Execute
+                            </button>
+                        </form>
+                    </div>
+                
 
+                    <table class="table table-striped">
                         <tr>
                             <td>Username</td>
                             <td>Fullname</td>
@@ -138,17 +182,50 @@
                             <td><a href=""><?php echo $row->accountName ?></a></td>
                             <td><p><?php echo $row->firstName ?></p></td>
                             <td><p><?php echo $row->universeAmount ?></p></td>
-                            <td><p><?php echo $row->isAdmin ?></p></td>
+
+                            <?php 
+                                $sql = "SELECT isAdmin FROM users";
+                                $res = mysqli_query($con, $sql);
+                                if ($res) {
+                                    while($row = mysqli_fetch_assoc($res)){
+                                        $isAdmin = $row['isAdmin'];
+                                    }
+                                }
+                            ?>
                             <td>
-                                <a href=""><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
-                                <a href=""><i class="fa fa-trash" aria-hidden="true"></i>Detete</a>
+                                <?php 
+                                    if ($isAdmin==1) {
+                                    ?>
+                                        <p>Admin</p>
+                                    <?php } else { ?>
+                                        <p>User</p>
+                                    <?php } ?>
                             </td>
-                        
+                            <td>
+                                <a href=""><i class="fa fa-edit" ></i>Edit</a>
+                                <a href=""><i class="fa fa-trash" ></i>Detete</a>
+                            </td>
                         </tr>
                         <?php } ?>
                     </table>
+                    <nav aria-label="Page navigation example" style="float: right;">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-            </div>
             </div>
           </section>
       </main>
