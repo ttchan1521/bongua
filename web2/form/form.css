@@ -187,3 +187,15 @@
 .dropdown-content a:hover {background-color: #ddd;}
 
 .dropdown:hover .dropdown-content {display: block;}
+
+.savebtn {
+  background-color: #19529C;
+  font-size: 50px;
+  font-size: 30px; background-color: #19529C; border: none; color: white; position: fixed; top: 0%; left: 0%;
+}
+
+.savebtn:hover {
+  color: #7a7aff;
+  transform: scale(0.97);
+  cursor: pointer;
+}

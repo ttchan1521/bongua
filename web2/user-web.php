@@ -130,7 +130,7 @@
                     if ($isAdmin==1) {
                     ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="users.php?id=<?php echo $id; ?>">Users</a>
+                            <a class="nav-link" href="users.php">Users</a>
                         </li>
                     <?php
                     }
@@ -215,6 +215,38 @@
             <label>
             entries
         </label>
+        <label>
+            Sort 
+            <select name="sort" aria-controls="timelines" class>
+            <?php 
+                    if (!isset($_SESSION['sort'])) {
+                ?>
+                        <option value="" selected>None</option>
+                        <option value="ASC">Date tăng</option>
+                        <option value="DESC">Date giảm</option>
+                <?php 
+                    } elseif ($_SESSION['sort'] == "DESC") {
+                    ?>
+                        <option value="">None</option>
+                        <option value="ASC">Date tăng</option>
+                        <option value="DESC" selected>Date giảm</option>
+                    <?php
+                    } elseif ($_SESSION['sort'] == "ASC") {
+                    ?>
+                        <option value="">None</option>
+                        <option value="ASc" selected>Date tăng</option>
+                        <option value="DESC">Date giảm</option>
+                    <?php    
+                    } else {
+                    ?>
+                        <option value="" selected>None</option>
+                        <option value="ASC">Date tăng</option>
+                        <option value="DESC">Date giảm</option>
+                    <?php
+                    }
+                ?>
+            </select>
+        </label>
         <input type="submit" name="smlength" value="Execute">    
     </form>
     </div>
@@ -237,6 +269,10 @@
             else $no_of_records_per_page = 9;
             $offset = ($pageno-1) * $no_of_records_per_page;
 
+            if (!isset($_SESSION['sort'])) {
+                $_SESSION['sort'] = "";
+            }
+
             if ($res) {
                 $count = mysqli_num_rows($res);
 
@@ -244,7 +280,15 @@
 
                     $total_pages = ceil($count / $no_of_records_per_page);
 
-                    $sql = "SELECT * FROM timelines WHERE userID=$id AND universesName LIKE '%$searchKey%' LIMIT $offset, $no_of_records_per_page";
+                    if ($_SESSION['sort'] == "ASC") {
+                        $sql = "SELECT * FROM timelines WHERE userID=$id AND universesName LIKE '%$searchKey%' ORDER BY last_updated ASC LIMIT $offset, $no_of_records_per_page";
+                    }
+                    elseif ($_SESSION['sort'] == "DESC") {
+                        $sql = "SELECT * FROM timelines WHERE userID=$id AND universesName LIKE '%$searchKey%' ORDER BY last_updated DESC LIMIT $offset, $no_of_records_per_page";
+                    }
+                    else {
+                        $sql = "SELECT * FROM timelines WHERE userID=$id AND universesName LIKE '%$searchKey%' LIMIT $offset, $no_of_records_per_page";
+                    }
                     $res_data = mysqli_query($con,$sql);
                     while($row = mysqli_fetch_array($res_data)){
                             $name = $row['universesName'];

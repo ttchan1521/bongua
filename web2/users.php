@@ -54,68 +54,40 @@
         <section class="row">
            <div class="col mt-4">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" 
-                    role="tab" aria-controls="home" aria-selected="true">User Editing</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" 
+            <li class="nav-item" role="presentation">
+                  <a href="#list" class="nav-link active" id="profile-tab" data-toggle="tab" data-target="#profile"
                     role="tab" aria-controls="profile" aria-selected="false">User List</a>
                 </li>
+                <li class="nav-item" role="presentation">
+                  <a href="#list" class="nav-link" id="create-tab" data-toggle="tab" data-target="#create"
+                    role="tab" aria-controls="create" aria-selected="false">Create user</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" data-target="#home" 
+                    role="tab" aria-controls="home" aria-selected="true">User Editing</a>
+                </li>
+                
             </ul>
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <form action="" method="post">
-                        <div class="card">
-                            <div class="card-body" style="width: 700px">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                          <label for="username">Username</label>
-                                          <input type="text"
-                                            class="form-control" name="username" id="username" aria-describedby="usernameHid" placeholder="">
-                                          <small id="usernameHid" class="form-text text-muted">Username is required</small>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="fullname">Fullname</label>
-                                            <input type="text"
-                                              class="form-control" name="fullname" id="fullname" aria-describedby="fullnameHid" placeholder="">
-                                            <small id="fullnameHid" class="form-text text-muted">Fullname is required</small>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                          <label for="">Password</label>
-                                          <input type="password"
-                                            class="form-control" name="password" id="password" aria-describedby="passwordHid" placeholder="">
-                                          <small id="passwordHid" class="form-text text-muted">Password is required</small>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Email</label>
-                                            <input type="text"
-                                              class="form-control" name="email" id="email" aria-describedby="emailHid" placeholder="">
-                                            <small id="emailHid" class="form-text text-muted">Email is required</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer text-muted">
-                           <button class="btn btn-secondary">Create</button>
-                           <button class="btn btn-secondary">Update</button>
-                           <button class="btn btn-secondary">Delete</button>
-                           <dbutton class="btn btn-secondary">Reset</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                
+                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <?php 
                         if(isset($_POST['search'])) {
-                        $searchKey = $_POST['search'];
-                        $sql = "SELECT * FROM users WHERE accountName LIKE '%$searchKey%' ";
-                        } else {
-                        $sql = "SELECT * FROM users ";
-                        $searchKey = "";
+                            $searchKey = $_POST['search'];
+                        }
+                        else $searchKey = "";
+
+                        if (!isset($_SESSION['sort_user'])) {
+                            $sql = "SELECT * FROM users WHERE accountName LIKE '%$searchKey%'";
+                        }
+                        elseif ($_SESSION['sort_user'] == "name asc") {
+                            $sql = "SELECT * FROM users WHERE accountName LIKE '%$searchKey%' ORDER BY accountName ASC";
+                        }
+                        else if ($_SESSION['sort_user'] == "name desc") {
+                            $sql = "SELECT * FROM users WHERE accountName LIKE '%$searchKey%' ORDER BY accountName DESC";
+                        }
+                        else {
+                            $sql = "SELECT * FROM users WHERE accountName LIKE '%$searchKey%'";
                         }
                         $result = mysqli_query($con, $sql);
                     ?> 
@@ -130,33 +102,33 @@
 			                <button style="submit" class="btn btn-outline-secondary" style="margin-bottom: 12px!important;"><i class="fas fa-search"></i></button>
 	                    </form>
 
-                        <form action="change_length.php" method="POST" style="float: right; margin-top: 35px;">
-                            <label> Option show </label>
-                            <select name="timelines_length" aria-controls="timelines" >
+                        <form action="sort.php" method="POST" style="float: right; margin-top: 35px;">
+                            <label> Sort </label>
+                            <select name="sort" aria-controls="timelines" >
                                     <?php 
-                                    if (!isset($_SESSION['length'])) {
+                                    if (!isset($_SESSION['sort_user'])) {
                                         ?>
-                                        <option value=10 selected>10</option>
-                                        <option value=20>20</option>
-                                        <option value=50>50</option>
+                                        <option value="" selected>None</option>
+                                        <option value="name asc">Name tăng</option>
+                                        <option value="name desc">Name giảm</option>
                                     <?php 
-                                        } elseif ($_SESSION['length'] == 50) {
+                                        } elseif ($_SESSION['sort_user'] == "name desc") {
                                              ?>
-                                         <option value=10>10</option>
-                                        <option value=20>20</option>
-                                        <option value=50 selected>50</option>
+                                         <option value="">None</option>
+                                        <option value="name asc">Name tăng</option>
+                                        <option value="name desc" selected>Name giảm</option>
                                     <?php
-                                            } elseif ($_SESSION['length'] == 20) {
+                                            } elseif ($_SESSION['sort_user'] == "name asc") {
                                         ?>
-                                        <option value=10>10</option>
-                                        <option value=20 selected>20</option>
-                                        <option value=50>50</option>
+                                        <option value="">None</option>
+                                        <option value="name asc" selected>Name tăng</option>
+                                        <option value="name desc">Name giảm</option>
                                     <?php    
                                         } else {
                                     ?>
-                                        <option value=10 selected>10</option>
-                                        <option value=20>20</option>
-                                        <option value=50>50</option>
+                                        <option value="" selected>None</option>
+                                        <option value="name asc">Name tăng</option>
+                                        <option value="name desc">Name giảm</option>
                                      <?php
                                     }
                                 ?>
@@ -179,31 +151,25 @@
                         </tr>
                         <?php while($row = mysqli_fetch_object($result)) { ?>
                         <tr>
-                            <td><a href=""><?php echo $row->accountName ?></a></td>
+                            <td><a href="view_timelines.php?id=<?php echo $row->userID ?>"><?php echo $row->accountName ?></a></td>
                             <td><p><?php echo $row->firstName ?></p></td>
                             <td><p><?php echo $row->universeAmount ?></p></td>
 
                             <?php 
-                                $sql = "SELECT isAdmin FROM users";
-                                $res = mysqli_query($con, $sql);
-                                if ($res) {
-                                    while($row = mysqli_fetch_assoc($res)){
-                                        $isAdmin = $row['isAdmin'];
-                                    }
+                                if ($row->isAdmin == 1) {
+                                    ?>
+                                    <td>Admin</td>
+                                    <?php
+                                }
+                                else {
+                                    ?>
+                                    <td>User</td>
+                                    <?php
                                 }
                             ?>
                             <td>
-                                <?php 
-                                    if ($isAdmin==1) {
-                                    ?>
-                                        <p>Admin</p>
-                                    <?php } else { ?>
-                                        <p>User</p>
-                                    <?php } ?>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa fa-edit" ></i>Edit</a>
-                                <a href=""><i class="fa fa-trash" ></i>Detete</a>
+                                <a href="users.php?id=<?php echo $row->userID; ?>"><i class="fa fa-edit" ></i>Edit</a>
+                                <a href="delete_user.php?id=<?php echo $row->userID; ?>"><i class="fa fa-trash" ></i>Detete</a>
                             </td>
                         </tr>
                         <?php } ?>
@@ -225,6 +191,114 @@
                             </li>
                         </ul>
                     </nav>
+
+
+                </div>
+                <div class="tab-pane fade" id="create" role="tabpanel" aria-labelledby="create-tab">
+                    <form action="create_user.php" method="post">
+                        <div class="card">
+                            <div class="card-body" style="width: 700px">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                          <label for="username">Username</label>
+                                          <input type="text"
+                                            class="form-control" name="username" id="username" aria-describedby="usernameHid">
+                                          <small id="usernameHid" class="form-text text-muted">Username is required</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fullname">Fullname</label>
+                                            <input type="text"
+                                              class="form-control" name="fullname" id="fullname" aria-describedby="fullnameHid">
+                                            <small id="fullnameHid" class="form-text text-muted">Fullname is required</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fullname">Password</label>
+                                            <input type="text"
+                                              class="form-control" name="password" id="fullname" aria-describedby="fullnameHid">
+                                            <small id="fullnameHid" class="form-text text-muted">Password is required</small>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                    
+                                                <label for="user"><input id="user" type="radio" name="user-admin" value=0>User</label>
+                                                <label for="admin"><input id="admin" type="radio" name="user-admin" value=1>Admin</label><br>
+                                        
+                                        
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                           <button type="submit" class="btn btn-secondary">Create</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <?php 
+                        $username = "";
+                        $fullname = "";
+                        $isAdmin = 0;
+                        if (isset($_GET['id'])) {
+                            $id = $_GET['id'];
+                            $sql = "SELECT * FROM users WHERE userID=$id";
+                            $res = mysqli_query($con, $sql);
+
+                            if ($res) {
+                                $row = mysqli_fetch_object($res);
+
+                                $username = $row->accountName;
+                                $fullname = $row->firstName;
+                                $isAdmin = $row->isAdmin;
+                            }
+                        }
+                    ?>
+                    <form action="update_users.php" method="post">
+                        <div class="card">
+                            <div class="card-body" style="width: 700px">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                          <label for="username">Username</label>
+                                          <input type="text"
+                                            class="form-control" name="username" id="username" aria-describedby="usernameHid" value="<?php echo $username; ?>">
+                                          <small id="usernameHid" class="form-text text-muted">Username is required</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fullname">Fullname</label>
+                                            <input type="text"
+                                              class="form-control" name="fullname" id="fullname" aria-describedby="fullnameHid" value="<?php echo $fullname; ?>">
+                                            <small id="fullnameHid" class="form-text text-muted">Fullname is required</small>
+                                        </div>
+                                        <div class="form-group">
+                                        <input type="hidden" name="id" value=<?php echo $id; ?>>
+                                        <?php 
+                                            if ($isAdmin == 1) {
+                                            ?>
+                                                <label for="user"><input id="user" type="radio" name="user-admin" value=0>User</label>
+                                                <label for="admin"><input id="admin" type="radio" name="user-admin" value=1 checked>Admin</label><br>
+                                            <?php 
+                                            }
+                                            else {
+                                            ?>
+                                                <label for="user"><input id="user" type="radio" name="user-admin" value=0 checked>User</label>
+                                                <label for="admin"><input id="admin" type="radio" name="user-admin" value=1>Admin</label><br>
+                                            <?php 
+                                            }
+                                        ?>
+                                        
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                           <button type="submit" class="btn btn-secondary">Update</button>
+                        </div>
+                    </form>
                 </div>
             </div>
           </section>
@@ -240,6 +314,13 @@
             event.preventDefault()
             $(this).tab('show')
         })
+
+        <?php if (isset($_GET['id'])) {
+            ?>
+            $('[href="#home"]').tab('show');
+        <?php 
+        }
+        ?>
     </script>
     
 </body>
