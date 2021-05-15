@@ -42,17 +42,23 @@
         $name = $_POST['eventName'];
         $date = $_POST['eventDate'];
         $des = $_POST['eventDes'];
+        $da = date("Y-m-d");
 
         $id = $_GET['id'];
         unset($_POST['submit']);
 
         $sql = "INSERT INTO events(universeID, eventName, eventDescription, eventYear) VALUES ($id, '$name', '$des', $date)";
+
+        $sql1 = "UPDATE timelines SET last_updated = '$da' WHERE universeID = $id";
+
         $res = mysqli_query($con, $sql);
+        $res1 = mysqli_query($con, $sql1);
 
         if ($res) {
             header("location:http://localhost/timelineProject/web2/form/form.php?id=$id");
         }
     }
+
 ?>
 </body>
 </html>

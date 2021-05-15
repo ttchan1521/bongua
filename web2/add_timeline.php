@@ -41,10 +41,14 @@
 
         $id = $_GET['id'];
         unset($_POST['submit']);
+        $date = date("Y-m-d");
 
-        $sql = "INSERT INTO timelines(universesName, userID) VALUES('$named', $id)";
+        $sql = "INSERT INTO timelines(universesName, userID, last_updated) VALUES('$named', $id, '$date')";
+
+        $sql1 = "UPDATE users SET universeAmount = universeAmount + 1 WHERE userID = $id";
 
         $res = mysqli_query($con, $sql);
+        $res1 = mysqli_query($con, $sql1);
 
         if ($res)
         {

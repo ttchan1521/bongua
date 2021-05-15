@@ -7,7 +7,10 @@
 
     $sql = "DELETE FROM timelines WHERE universeID = $tml";
 
+    $sql1 = "UPDATE users SET universeAmount = universeAmount - 1 WHERE userID = $id";
+
     $res = mysqli_query($con, $sql);
+    $res1 = mysqli_query($con, $sql1);
 
     if ($res)
     {

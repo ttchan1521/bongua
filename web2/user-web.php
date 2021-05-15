@@ -152,6 +152,14 @@
 <div id="add">
     <?php
         $id = $_GET['id']; 
+
+        $s = "SELECT * FROM users WHERE userID = $id";
+
+        $r = mysqli_query($con, $s);
+
+        if ($res) {
+            $ro = mysqli_fetch_assoc($r);
+        }
     ?>
     <a href="add_timeline.php?id=<?php echo $id; ?>" class="btn btn-outline-secondary" onclick="">Add new timeline</a>
 </div>
@@ -159,6 +167,7 @@
 
 <div class="left-menu" style="max-height: 300px">
     <h1 class="display-4 my-4 text-info">Your list timeline</h1>
+    <h2 class="display-4 my-4 text-info">Total: <?php echo $ro['universeAmount']; ?></h2>
 
     <?php 
         if(isset($_POST['search'])) {

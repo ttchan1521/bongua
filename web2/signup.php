@@ -83,7 +83,7 @@
 
             if ($password == $repeatPsw)
             {
-                $sql = "INSERT INTO users(accountName, accountPassword) VALUES('$username', '$password')";
+                $sql = "INSERT INTO users(accountName, accountPassword, universeAmount) VALUES('$username', '$password', 0)";
 
                 $res = mysqli_query($con, $sql);
 

@@ -44,8 +44,9 @@
         $tml = $_GET['tml'];
         $id = $_GET['id'];
         unset($_POST['submit']);
+        $date = date("Y-m-d");
 
-        $sql = "UPDATE timelines SET universesName = '$named' WHERE universeID = $tml";
+        $sql = "UPDATE timelines SET universesName = '$named', last_updated = '$date' WHERE universeID = $tml";
 
         $res = mysqli_query($con, $sql);
 
