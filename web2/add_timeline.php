@@ -20,6 +20,8 @@
 
             <label for="name">Name: </label>
             <input type="text" name="name" style="background-color: #FFDAB9; height: 70px; font-size: 25px"required>
+            <label for="one" style="font-size: 50px"><input id="one" type="radio" name="tmltype" value=1 style="width: 30px; height:30px">One line</label>
+            <label for="lines" style="font-size: 50px"><input id="lines" type="radio" name="tmltype" value=2 style="width: 30px; height:30px">Line</label><br>
 
             <div class="clearfix">
                 <?php 
@@ -41,14 +43,12 @@
 
         $id = $_GET['id'];
         unset($_POST['submit']);
+        $line = $_POST['tmltype'];
         $date = date("Y-m-d");
 
-        $sql = "INSERT INTO timelines(universesName, userID, last_updated) VALUES('$named', $id, '$date')";
-
-        $sql1 = "UPDATE users SET universeAmount = universeAmount + 1 WHERE userID = $id";
+        $sql = "INSERT INTO timelines(universesName, userID, last_updated, tml_type) VALUES('$named', $id, '$date', $line)";
 
         $res = mysqli_query($con, $sql);
-        $res1 = mysqli_query($con, $sql1);
 
         if ($res)
         {

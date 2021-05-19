@@ -8,7 +8,7 @@ html{
     scroll-behavior: smooth;
 }
 body{
-    background: #000;
+    background: #6f4e37;
     color: #fff;
 }
 ::selection{
@@ -16,10 +16,26 @@ body{
     background: #7a7aff;
 }
 .header{
-    position: sticky;
+    position: fixed;
+    top: 0;
+    z-index: 1;
     width: 100%;
     height: 80px;
     background: #fff;
+}
+.header:hover{
+    animation-name: rainbow;
+    animation-duration: 0.2s;
+    animation-iteration-count: infinite;
+    animation-delay: 2s;
+}
+@keyframes rainbow{
+    0%{background: linear-gradient(to left, #ff7979 0%, #ffbd7a 20%, #ffff7a 40%, #7aff7a 60%, #7abdff 80%, #bd7aff 100%);}
+    20%{background: linear-gradient(to left, #ffbd7a 0%, #ffff7a 20%, #7aff7a 40%, #7abdff 60%, #bd7aff 80%, #ff7979 100%);}
+    40%{background: linear-gradient(to left, #ffff7a 0%, #7aff7a 20%, #7abdff 40%, #bd7aff 60%, #ff7979 80%, #ffbd7a 100%);}
+    60%{background: linear-gradient(to left, #7aff7a 0%, #7abdff 20%, #bd7aff 40%, #ff7979 60%, #ffbd7a 80%, #ffff7a 100%);}
+    80%{background: linear-gradient(to left, #7abdff 0%, #bd7aff 20%, #ff7979 40%, #ffbd7a 60%, #ffff7a 80%, #7aff7a 100%);}
+    100%{background: linear-gradient(to left, #bd7aff 0%, #ff7979 20%, #ffbd7a 40%, #ffff7a 60%, #7aff7a 80%, #7abdff 100%);}
 }
 .header .tool-bar{
     position: absolute;
@@ -28,7 +44,7 @@ body{
     right: 5%;
     height: 40px;
     border-radius: 20px 20px 0px 0px;
-    background-color: #000;
+    background-color: #6f4e37;
     font-size: 25px;
 }
 .header .tool-bar a:hover{
@@ -67,7 +83,7 @@ body{
 .header .tool-bar .form-option a{
     position: relative;
     font-size: 15px;
-    color: #000;
+    color: #6f4e37;
 }
 .header .tool-bar .form-option p{
     padding: 0 0 0 15px;
@@ -99,7 +115,172 @@ body{
     top: 5px;
     left: 77%;
 }
-
+.wrapper{
+    position: absolute;
+    top: 80px;
+}
+.wrapper .time-line{
+    width: max-content;
+    height: 120px;
+    margin: 40px;
+}
+.wrapper .time-line .line-icon{
+     position: absolute;
+     background: #f2f2f2;
+     height: 40px;
+     width: 40px;
+     left: 80px;
+     transform: translateY(40px);
+     text-align: center;
+     line-height: 40px;
+     border-radius: 50%;
+     box-shadow: 0 0 0 4px #fff, inset 0 2px 0 rgba(0,0,0,0.08), 0 3px 0 4px rgba(0,0,0,0.05);
+     color: #6f4e37;
+     font-size: 17px;
+}
+.wrapper .time-line .line-icon:hover{
+    transform: scale(0.97) translateY(40px);
+    color: #7a7aff;
+    cursor: pointer;
+}
+.wrapper .time-line .line-name{
+    position: absolute;
+    left: 40px;
+    transform: translateY(90px);
+    font-weight: 600;
+    width: 120px;
+    text-align: center;
+}
+.wrapper .time-line .line-delete{
+    display: none;
+    text-decoration: none;
+    position: absolute;
+    left: 105px;
+    transform: translateY(65px);
+    background: #fff;
+    opacity: 0.95;
+    color: #6f4e37;
+    padding: 0 15px 0 15px;
+    height: 20px;
+}
+.time-line .line{
+    transform: translateX(120px) translateY(60px);
+    width: max-content;
+    height: 4px;
+    background: #fff;
+    border-radius: 2px 0 0 2px;
+}
+.time-line .line .event-icon{
+    position: relative;
+    color: #fff;
+    font-size: 17px;
+    margin: 70px;
+    top: -7px;
+}
+.time-line .line .event-icon:hover{
+    text-shadow: 0 0 10px #7a7aff;
+}
+.time-line .line .event-icon-not{
+    color: transparent;
+}
+.time-line .line .event-icon-not:hover{
+    text-shadow: none;
+}
+.time-line .line .event-date{
+    position: absolute;
+    transform: translateX(-73px) translateY(-30px);
+    transform: translateX(-150px) translateY(-30px);
+    width: 140px;
+    text-align: center;
+}
+.time-line .line .event-name{
+    position: absolute;
+    transform: translateX(-150px) translateY(20px);
+    overflow: hidden;
+    width: 140px;
+    height: 75px;
+    text-align: center;
+}
+.wrapper .event-box{
+    display: flex;
+    position: fixed;
+    top: 55%;
+    bottom: 3%;
+    left: 5%;
+    right: 12%;
+    background: #f2f2f2;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 0 4px #fff, inset 0 2px 0 rgba(0,0,0,0.08), 0 3px 0 4px rgba(0,0,0,0.05);
+    color: #6f4e37;
+}
+.event-box .event-head{
+    font-size: 20px;
+    height: 45px;
+    overflow: hidden;
+    font-weight: 600;
+}
+.event-box .event-head .close-icon{
+    position: absolute;
+    color: #6f4e37;
+    top: 10px;
+    right: 15px;
+}
+.event-box .event-head .close-icon:hover{
+    transform: scale(0.97);
+    color: #7a7aff;
+}
+.event-box .event-body{
+    margin: 0 10px 17px 17px;
+    width: calc(100% - 20px);
+    text-align: justify;
+    height: 110px;
+    overflow: scroll;
+}
+.event-body::-webkit-scrollbar {
+    display: none;
+}
+.event-box .event-bottom a{
+    text-decoration: none;
+    background: #6f4e37;
+    color: #fff;
+    padding: 7px 15px;
+    border-radius: 5px;
+    margin: 5px;
+}
+.event-box .event-bottom a:hover{
+    text-shadow: 0 0 10px #7a7aff;
+}
+.event-box .event-bottom span{
+    position: absolute;
+    right: 20px;
+    font-weight: 600;
+}
+.nothing {
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    top: 35%;
+    color: #fff;
+}
+.nothing-2 {
+    position: fixed;
+    width: 100%;
+    text-align: right;
+    top: 70%;
+    right: 5%;
+    color: #fff;
+}
+.nothing-3 {
+    position: fixed;
+    width: 100%;
+    font-size: 45px;
+    top: 108%;
+    right: 1%;
+    color: #fff;
+    transform: rotate(164deg);
+}
 .add-icon{
      position: fixed;
      background: #f2f2f2;
@@ -109,7 +290,7 @@ body{
      line-height: 40px;
      border-radius: 50%;
      box-shadow: 0 0 0 4px #fff, inset 0 2px 0 rgba(0,0,0,0.08), 0 3px 0 4px rgba(0,0,0,0.05);
-     color: #000;
+     color: #6f4e37;
      font-size: 25px;
      bottom: 7%;
      right: 7%;
@@ -117,5 +298,16 @@ body{
 .add-icon:hover{
     transform: scale(0.97);
     color: #7a7aff;
-    cursor: pointer;
 }
+
+.savebtn {
+    background-color: #6f4e37;
+    font-size: 50px;
+    font-size: 30px; border: none; color: white; position: fixed; top: 6%; left: 8.5%;
+  }
+  
+  .savebtn:hover {
+
+    transform: scale(0.97);
+    cursor: pointer;
+  }

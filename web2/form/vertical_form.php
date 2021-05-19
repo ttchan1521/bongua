@@ -1,27 +1,40 @@
 <?php
-  session_start();
-  include('connect_db.php');
+    session_start();
+    include('connect_db.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="scaling_form.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
-  
-    
-
 </head>
 <body>
-    <div class="timeline" id="content" style="background-color: #19529C">
-        <?php 
+
+<div class="header">
+    <div class="tool-bar">
+        <?php
+            $id = $_GET['id'];
+            $uid = $_GET['u'];
+        ?>
+        <a href="http://localhost/timelineProject/web2/user-web.php?id=<?php echo $id; ?>" class="home-icon" title="Home"><i class="fas fa-home"></i></a>
+        <a onmouseover="document.getElementById('form-option').style.display='block'" onmouseout="document.getElementById('form-option').style.display='none'" class="sync-icon" title="Form option"><i class="fas fa-sync-alt"></i></a>
+        <div onmouseover="document.getElementById('form-option').style.display='block'" onmouseout="document.getElementById('form-option').style.display='none'" id="form-option" class="form-option">
+            <a href="table_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1"><div class="form-1"><p>Table</p></div></a>
+            <a href="scaling_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1"><div class="form-2"><p>Real-Time Scale</p></div></a>
+            <a href="basic_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1"><div class="form-3"><p>Basic</p></div></a>
+            <a href="paging_form.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&e=-1&page=1&n=4"><div class="form-4"><p>Page By Page</p></div></a>
+            <a><div class="form-5"><p>Vertical</p></div></a>
+        </div>
+        <a href="search_event.php?id=<?php echo $id; ?>&u=<?php echo $uid; ?>&from=basic" class="search-icon" title="Search"><i class="fas fa-search"></i></a>
+    </div>
+</div>
+<div class="wrapper">
+    <div class="timeline">
+        <?php
           $id = $_GET['id'];
           $sql = "SELECT * FROM events WHERE universeID = $id ORDER BY eventYear";
           $res = mysqli_query($con, $sql);
@@ -31,13 +44,13 @@
 
             if ($count > 0) {
               $t = 0;
-              while($row = mysqli_fetch_assoc($res)) 
+              while($row = mysqli_fetch_assoc($res))
               {
                 $eid = $row['eventID'];
                 $eventName = $row['eventName'];
                 $description = $row['eventDescription'];
                 $year = $row['eventYear'];
-                
+
                 if ($t % 2 == 0) {
 
                 ?>
@@ -80,31 +93,20 @@
                 $t = $t + 1;
               }
             }
-            else echo "There's nothing";
+            else {
+                ?>
+                    </div>
+                    <div class="nothing"><h2>There's nothing here yet!</h2></div>
+                    <div class="nothing-2"><h2>Create something here</h2></div>
+                    <div class="nothing-3"><i class="fas fa-share"></i></div>
+                <?php
+            }
           }
         ?>
-        
-      </div>
-      <button class="savebtn" id="save" ><i class="fa fa-save"></i></button>
-      <a href="add_event.php?id=<?php echo $id; ?>" class="add-icon"><i class="fas fa-plus"></i></a>
-      <a href="screenshots.php?id=<?php echo $id; ?>" onclick="" class="close-icon"><i class="fas fa-times"></i></a>
 
-      <script>
-        window.onload = function() {
-          document.getElementById("save").addEventListener("click", ()=> {
-            const invoice = this.document.getElementById("content");
-            console.log(invoice);
-            console.log(window);
-            var opt = {
-              margin: 1,
-              image: {type: 'jpeg', quality: 0.98},
-              html2canvas: {sclae: 2},
-              jsPDF: {unit: 'in', format: 'letter', orientation: 'portrait'}
-            }
-            html2pdf().from(invoice).set(opt).save();
-            
-          })
-        }
-      </script>
+      </div>
+</div>
+      <a href="add_event.php?id=<?php echo $id; ?>" class="add-icon"><i class="fas fa-plus"></i></a>
+      <a onclick="window.location.href='../user-web.php?id=<?php echo $_SESSION['userID']; ?>'" class="close-icon"><i class="fas fa-times"></i></a>
 </body>
 </html>

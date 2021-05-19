@@ -149,11 +149,18 @@
                             <td>Role</td>
                             <td>&nbsp;</td>
                         </tr>
-                        <?php while($row = mysqli_fetch_object($result)) { ?>
+                        <?php while($row = mysqli_fetch_object($result)) { 
+                                $id = $row->userID;
+                                
+                                $ss = "SELECT * FROM timelines WHERE userID = $id";
+
+                                $ress = mysqli_query($con, $ss);
+                                $num = mysqli_num_rows($ress);
+                        ?>
                         <tr>
                             <td><a href="view_timelines.php?id=<?php echo $row->userID ?>"><?php echo $row->accountName ?></a></td>
                             <td><p><?php echo $row->firstName ?></p></td>
-                            <td><p><?php echo $row->universeAmount ?></p></td>
+                            <td><p><?php echo $num; ?></p></td>
 
                             <?php 
                                 if ($row->isAdmin == 1) {

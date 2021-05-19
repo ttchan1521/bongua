@@ -58,14 +58,19 @@
                   <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" 
                     role="tab" aria-controls="home" aria-selected="true">Edit Profile</a>
                 </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" 
-                    role="tab" aria-controls="profile" aria-selected="false">Change Password</a>
-                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
+                <?php 
+                  $id = $_GET['id'];
+
+                  $sql = "SELECT * FROM users WHERE userID = $id";
+
+                  $res = mysqli_query($con, $sql);
+
+                  $row = mysqli_fetch_assoc($res);
+                ?>
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <form action="" method="post">
+                    <form action="update_Profile.php" method="post">
                         <div class="card">
                             <div class="card-body" style="width: 700px">
                                 <div class="row">
@@ -73,76 +78,32 @@
                                         <div class="form-group">
                                           <label for="username">Username</label>
                                           <input type="text"
-                                            class="form-control" name="username" id="username" aria-describedby="usernameHid" placeholder="Enter UserName">
+                                            class="form-control" name="username" id="username" aria-describedby="usernameHid" placeholder="Enter UserName" value="<?php echo $row['accountName']; ?>">
                                           <small id="usernameHid" class="form-text text-muted"></small>
                                         </div>
                                         <div class="form-group">
                                             <label for="fullname">Your Firstname</label>
                                             <input type="text"
-                                              class="form-control" name="firstname" id="firstname" aria-describedby="firstnameHid" placeholder="Enter Firstname">
+                                              class="form-control" name="firstname" id="firstname" aria-describedby="firstnameHid" placeholder="Enter Firstname" value="<?php echo $row['firstName']; ?>">
                                             <small id="firstnameHid" class="form-text text-muted"></small>
                                         </div>
-                                    </div>
-                                    <div class="col">
                                         <div class="form-group">
                                           <label for="">Your LastName</label>
                                           <input type="text"
-                                            class="form-control" name="lastname" id="lastname" aria-describedby="lastNameHid" placeholder="Enter LastName">
+                                            class="form-control" name="lastname" id="lastname" aria-describedby="lastNameHid" placeholder="Enter LastName" value="<?php echo $row['lastName']; ?>">
                                           <small id="lastNameHid" class="form-text text-muted"></small>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="">Email Address</label>
-                                            <input type="text"
-                                              class="form-control" name="email" id="email" aria-describedby="emailHid" placeholder="Enter Email">
-                                            <small id="emailHid" class="form-text text-muted"></small>
-                                        </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer text-muted">
-                           <button class="btn btn-secondary">Update</button>
+                           <button type="submit" name="submit" class="btn btn-secondary">Update</button>
+                           <a href="user-web.php?id=<?php echo $id; ?>" class="btn btn-secondary" style="color: white">Cancel</a>
                         </div>
                     </form>
                 </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <form action="" method="post">
-                        <div class="card">
-                            <div class="card-body" style="width: 400px">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                          <label for="username">Username</label>
-                                          <input type="text"
-                                            class="form-control" name="username" id="username" aria-describedby="usernameHid" placeholder="Enter Username">
-                                          <small id="usernameHid" class="form-text text-muted">Username is required</small>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="fullname">Password</label>
-                                            <input type="password"
-                                              class="form-control" name="password" id="password" aria-describedby="fullnameHid" placeholder="Enter Password">
-                                            <small id="fullnameHid" class="form-text text-muted"></small>
-                                        </div>
-                                        <div class="form-group">
-                                          <label for="">Current Password</label>
-                                          <input type="password"
-                                            class="form-control" name="currentPassword" id="currentPassword" aria-describedby="currentPasswordHid" placeholder="Current Password">
-                                          <small id="currentPasswordHid" class="form-text text-muted"></small>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Confirm Password</label>
-                                            <input type="password"
-                                              class="form-control" name="comfirmPassword" id="comfirmPassword" aria-describedby="comfirmPasswordHid" placeholder="Confirm Password">
-                                            <small id="comfirmPassword" class="form-text text-muted"></small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer text-muted">
-                           <button class="btn btn-secondary">Change password</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

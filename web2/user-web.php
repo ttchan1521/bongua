@@ -154,8 +154,11 @@
         $id = $_GET['id']; 
 
         $s = "SELECT * FROM users WHERE userID = $id";
+        $sq = "SELECT * FROM timelines WHERE userID = $id";
 
         $r = mysqli_query($con, $s);
+        $re = mysqli_query($con, $sq);
+        $num = mysqli_num_rows($re);
 
         if ($res) {
             $ro = mysqli_fetch_assoc($r);
@@ -167,7 +170,7 @@
 
 <div class="left-menu" style="max-height: 300px">
     <h1 class="display-4 my-4 text-info">Your list timeline</h1>
-    <h2 class="display-4 my-4 text-info">Total: <?php echo $ro['universeAmount']; ?></h2>
+    <h2 class="display-4 my-4 text-info">Total: <?php echo $num; ?></h2>
 
     <?php 
         if(isset($_POST['search'])) {
@@ -302,12 +305,27 @@
                     while($row = mysqli_fetch_array($res_data)){
                             $name = $row['universesName'];
                             $tml = $row['universeID'];
+                            $type = $row['tml_type'];
                             ?>
                                 <div class="col-md-4">
                                     <div class="card">
-                                        <img class="card-img-top" src="./images/image.jpg">
+                                        <img class="card-img-top" src="./form/tml<?php echo $tml; ?>.png" onerror="this.src='images/image1.jpg'">
                                         <div class="card-body">
+                                            <?php 
+                                                if ($type == 1) {
+                                            ?>
                                             <h4 class="card-title"><a href="form/form.php?id=<?php echo $tml; ?>"><?php echo $name; ?></a></h4>
+
+                                            <?php 
+                                                }
+                                                else 
+                                                {
+                                                    ?>
+                                                        <h4 class="card-title"><a href="form/basic_form.php?id=<?php echo $id; ?>&u=<?php echo $tml; ?>&e=-1"><?php echo $name; ?></a></h4>
+
+                                            <?php
+                                                }
+                                            ?>
             
                                             <a href="rename_timeline.php?id=<?php echo $id; ?>&tml=<?php echo $tml; ?>&tmlName=<?php echo $name; ?>" class="btn btn-outline-secondary">Rename</a>
                                             <a href="delete_timeline.php?id=<?php echo $id; ?>&tml=<?php echo $tml; ?>" class="btn btn-outline-secondary">Delete</a>

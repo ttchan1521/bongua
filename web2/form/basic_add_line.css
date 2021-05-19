@@ -16,36 +16,36 @@ body{
     color: #fff;
     background: #7a7aff;
 }
-.search-event-box{
+.add-line-box{
     position: absolute;
-    padding: 20px 20px 10px 0;
+    padding: 20px 20px 10px 20px;
     width: 500px;
     left: calc(50% - 250px);
-    top: 15%;
+    bottom: 50%;
     background: #fff;
     color: #6f4e37;
     border-radius: 5px;
     box-shadow: 0 0 0 4px #fff, inset 0 2px 0 rgba(0,0,0,0.08), 0 3px 0 4px rgba(0,0,0,0.05);
 }
-.search-event-box .search-event-head .close-icon{
+.add-line-box .add-line-head .close-icon{
     position: absolute;
     color: #6f4e37;
     top: 10px;
     right: 15px;
 }
-.search-event-box .search-event-head .close-icon:hover{
+.add-line-box .add-line-head .close-icon:hover{
     transform: scale(0.97);
     color: #7a7aff;
     cursor: pointer;
 }
-.search-event-box .search-event-main{
+.add-line-box .add-line-main{
     font-weight: 600;
     padding-top: 20px;
     text-align: right;
     margin-right: 10px;
 }
-.search-event-box .search-event-main input{
-    width: 70%;
+.add-line-box .add-line-main input{
+    width: 75%;
     height: 40px;
     border-radius: 5px;
     border: 1px solid grey;
@@ -53,12 +53,11 @@ body{
     margin-bottom: 10px;
     margin-top: 5px;
 }
-.search-event-box .search-event-bottom{
+.add-line-box .add-line-bottom{
     position: relative;
     display: flex;
-    padding: 0 0 0 20px;
 }
-.search-event-box .search-event-bottom button{
+.add-line-box .add-line-bottom button{
     transform: translateX(calc(230px - 50%));
     background-color: #6f4a37;
     border: none;
@@ -68,24 +67,4 @@ body{
     text-decoration: none;
     cursor: pointer;
     border-radius: 5px;
-}
-.search-event-box .search-event-bottom button:hover{
-    text-shadow: 0 0 10px #7a7aff;
-}
-.search-event-box .search-event-result{
-    position: relative;
-    padding: 20px 0 0 0;
-}
-.search-event-box .search-event-result a{
-    text-decoration: none;
-    color: #6f4a37;
-    text-align: justify;
-}
-.search-event-box .search-event-result a:hover{
-    transform: scale(0.97);
-    color: #7a7aff;
-    cursor: pointer;
-}
-.search-event-box .search-event-result .result{
-    padding: 10px 10px 10px 30px;
 }
