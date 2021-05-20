@@ -96,19 +96,16 @@
         $id = $_GET['id'];
         $uid = $_GET['u'];
         unset($_POST['submit']);
-        $da = date("Y-m-d");
 
-        $sql = "UPDATE events SET eventName = '$name', eventYear = '$date', eventDescription = '$des', eventLine = '$line' WHERE eventID = $eid";
-        $sql1 = "UPDATE timelines SET last_updated = '$da' WHERE universeID = $uid";
+        $sql = "UPDATE events SET eventName = '$name', eventYear = $date, eventDescription = '$des', eventLine = '$line' WHERE eventID = $eid";
         $res = mysqli_query($con, $sql);
-        $ress = mysqli_query($con, $sql1);
 
         if ($res) {
             if($from == "basic") {
                 header("location:http://localhost/timelineProject/web2/form/basic_form.php?id=$id&u=$uid&e=-1");
             }
             if($from == "paging") {
-                header("location:http://localhost/timelineProject/web2/form/paging_form.php?id=$id&u=$uid&e=-1");
+                header("location:http://localhost/timelineProject/web2/form/paging_form.php?id=$id&u=$uid&e=-1&page=1&n=4");
             }
             if($from == "scaling") {
                 header("location:http://localhost/timelineProject/web2/form/scaling_form.php?id=$id&u=$uid&e=-1");

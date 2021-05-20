@@ -42,8 +42,6 @@
             $sql = "SELECT * FROM `lines` WHERE universeID = $uid ORDER BY lineName";
             $res = mysqli_query($con, $sql);
 
-
-            $line = mysqli_fetch_assoc($res)['lineName'];
             while($row = mysqli_fetch_assoc($res)) {
                 $line = $row['lineName'];
                 $lid = $row['lineID'];
@@ -63,7 +61,6 @@
         $name = $_POST['eventName'] ?? "";
         $date = $_POST['eventDate'];
         $des = $_POST['eventDes'] ?? "";
-        $da = date("Y-m-d");
 
         $line = "";
 
@@ -79,17 +76,14 @@
         unset($_POST['submit']);
 
         $sql = "INSERT INTO events(universeID, eventName, eventDescription, eventLine, eventYear) VALUES ($uid, '$name', '$des', '$line', $date)";
-
-        $sql1 = "UPDATE timelines SET last_updated = '$da' WHERE universeID = $uid";
         $res = mysqli_query($con, $sql);
-        $ress = mysqli_query($con, $sql1);
 
         if ($res) {
             if($from == "basic") {
                 header("location:http://localhost/timelineProject/web2/form/basic_form.php?id=$id&u=$uid&e=-1");
             }
             if($from == "paging") {
-                header("location:http://localhost/timelineProject/web2/form/paging_form.php?id=$id&u=$uid&e=-1");
+                header("location:http://localhost/timelineProject/web2/form/paging_form.php?id=$id&u=$uid&e=-1&page=1&n=4");
             }
             if($from == "scaling") {
                 header("location:http://localhost/timelineProject/web2/form/scaling_form.php?id=$id&u=$uid&e=-1");

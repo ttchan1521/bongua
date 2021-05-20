@@ -11,7 +11,19 @@
         $sql1 = "UPDATE timelines SET last_updated = '$da' WHERE universeID = $uid";
         $res1 =mysqli_query($con, $sql1);
 
-    $sql = "DELETE FROM `lines` WHERE lineID LIKE '%$lid%'";
+    $sql = "DELETE FROM `lines` WHERE lineID = $lid";
+
+    $sqll = "SELECT lineName FROM lines WHERE lineD = $lid";
+
+    $r = mysqli_query($con, $sqll);
+
+    $row = mysqli_fetch_assoc($r);
+
+    $name = $row['lineName'];
+
+    $sqlll = "DELETE FROM events WHERE eventLine = '$name'";
+
+    $ress = mysqli_query($con, $sqlll);
 
     $res = mysqli_query($con, $sql);
 

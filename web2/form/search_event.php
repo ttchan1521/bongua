@@ -44,7 +44,7 @@
                 $uid = $_GET['u'];
                 unset($_POST['submit']);
 
-                $sql = "SELECT *  FROM events WHERE universeID = 42 AND eventName LIKE '%$name%' AND eventDescription LIKE '%$des%' AND eventLine LIKE '%$line%' AND eventYear LIKE '%$date%'";
+                $sql = "SELECT *  FROM events WHERE universeID = $uid AND eventName LIKE '%$name%' AND eventDescription LIKE '%$des%' AND eventLine LIKE '%$line%' AND eventYear LIKE '%$date%'";
                 $res = mysqli_query($con, $sql);
 
                 if($res) {
